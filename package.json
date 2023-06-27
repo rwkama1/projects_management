@@ -1,0 +1,23 @@
+{
+  "name": "projects_management",
+  "version": "1.0.0",
+  "description": "This package contains a backend of what would be the logic of a projects management software",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rwkama1/projects_management"
+  },
+  "dependencies": {
+    "mssql": "8.1.1"
+  },
+  "keywords": [
+    "backend",
+    "js",
+    "javascript"
+  ],
+  "author": "Carlos Rodriguez <rwkamandriw@gmail.com>",
+  "license": "MIT"
+}
