@@ -1,6 +1,8 @@
 
 const { DataProject } = require("./data/DataProject");
+const { DataTask } = require("./data/DataTask");
 const { DTOProject } = require("./entity/DTOProject");
+const { DTOTask } = require("./entity/DTOTask");
 
 // // //#region PROJECTS
 
@@ -270,4 +272,40 @@ const { DTOProject } = require("./entity/DTOProject");
 
 
 // // //#endregion PROJECTS
+
+//#region TASK
+
+ async function registerTask() {
+
+     for (let index = 1; index < 8; index++) {
+
+            let dtotask = new DTOTask();
+            dtotask.ID_project = index+1;
+            dtotask.Task_name = "Task_name" + index.toString();
+            dtotask.Descriptionn = "Descriptionn" + index.toString();
+            dtotask.Start_datee = `2023-07-1${index}`;
+            dtotask.End_date = `2023-08-1${index}`;
+            dtotask.Task_owner = "Task_owner" + index.toString();
+            dtotask.Priorityy = "Low";
+            dtotask.Hours_estimate = index+1;
+
+            let registerTask = await DataTask.registerTask(dtotask);
+            if (registerTask===-1) {
+                throw new
+                 Error("The Priority must be High , Medium , Low ");
+            }
+            if (registerTask===-2) {
+                throw new 
+                Error("The End Date must be higher than Start Date");
+            }
+            if (registerTask===-3) {
+                throw new
+                Error("The Project does not exists");
+            }
+        console.log("Task registered successfully");
+        }
+    }
+    registerTask().then()
+
+//#endregion TASK
 

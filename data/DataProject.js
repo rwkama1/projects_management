@@ -60,61 +60,7 @@ class DataProject
         return resultquery;
         
     }
-    // static  updateProject=async(dtoproject)=>
-    // {
-    //     let {ID_project,Project_name ,Descriptionn ,Start_datee ,End_date ,
-    //         Project_manager,Priorityy,Client,Budget}=dtoproject;
-    //     let resultquery;
-    //     let queryinsert = `
-
-    //         declare @ID_project int = ${ID_project};
-    //         declare @Project_name VARCHAR(100) = '${Project_name}';
-    //         declare @Descriptionn VARCHAR(100) = '${Descriptionn}';
-    //         declare @Start_datee date = '${Start_datee}';
-    //         declare @End_date date = '${End_date}';
-    //         declare @Project_manager VARCHAR(100)  = '${Project_manager}';
-    //         declare @Priorityy VARCHAR(100) ='${Priorityy}';
-    //         declare @Client VARCHAR(100) = '${Client}';
-    //         declare @Budget  DECIMAL(18, 2) = ${Budget};
-
-    //         IF @Priorityy NOT IN ('High', 'Medium', 'Low')
-    //         BEGIN
-    //             SELECT -1 AS PriorityError;
-    //         END
-    //         ELSE
-    //         BEGIN
-    //             IF @End_date <= @Start_datee
-    //             BEGIN
-    //                 SELECT -2 AS DateError;
-    //             END
-    //             ELSE
-    //             BEGIN
-    //                 insert into Projects 
-    //                 VALUES (@Project_name, @Descriptionn, @Start_datee,
-    //                 @End_date, 'In Progress', @Project_manager,
-    //                 @Priorityy, @Client, @Budget)
-
-    //                 select 1 as updatesucess
-    //             END
-    //         END
-       
-    //       `;
-    //       let pool = await Conection.conection();
-    //         const result = await pool.request()
-    //         .query(queryinsert)
-    //         resultquery = result.recordset[0].PriorityError;
-    //         if(resultquery===undefined)
-    //         {
-    //         resultquery = result.recordset[0].insertsuccess;
-    //             if(resultquery===undefined)
-    //             {
-    //             resultquery = result.recordset[0].DateError;
-    //             }
-    //         }
-    //     pool.close();
-    //     return resultquery;
-        
-    // }
+    
     static  updateDescriptionNameProject=async(idproject,projectname,description)=>
     {
        
