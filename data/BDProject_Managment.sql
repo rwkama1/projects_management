@@ -119,5 +119,3 @@ SELECT * FROM ResourceAssignments;
 SELECT * FROM Comments;
 SELECT * FROM Attachments;
 
- 
- delete from Tasks where 

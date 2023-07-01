@@ -275,37 +275,234 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //#region TASK
 
- async function registerTask() {
+//  async function registerTask() {
 
-     for (let index = 1; index < 8; index++) {
+//      for (let index = 1; index < 8; index++) {
 
-            let dtotask = new DTOTask();
-            dtotask.ID_project = index+1;
-            dtotask.Task_name = "Task_name" + index.toString();
-            dtotask.Descriptionn = "Descriptionn" + index.toString();
-            dtotask.Start_datee = `2023-07-1${index}`;
-            dtotask.End_date = `2023-08-1${index}`;
-            dtotask.Task_owner = "Task_owner" + index.toString();
-            dtotask.Priorityy = "Low";
-            dtotask.Hours_estimate = index+1;
+//             let dtotask = new DTOTask();
+//             dtotask.ID_project = index+1;
+//             dtotask.Task_name = "Task_name" + index.toString();
+//             dtotask.Descriptionn = "Descriptionn" + index.toString();
+//             dtotask.Start_datee = `2023-07-1${index}`;
+//             dtotask.End_date = `2023-08-1${index}`;
+//             dtotask.Task_owner = "Task_owner" + index.toString();
+//             dtotask.Priorityy = "Low";
+//             dtotask.Hours_estimate = index+1;
 
-            let registerTask = await DataTask.registerTask(dtotask);
-            if (registerTask===-1) {
-                throw new
-                 Error("The Priority must be High , Medium , Low ");
-            }
-            if (registerTask===-2) {
-                throw new 
-                Error("The End Date must be higher than Start Date");
-            }
-            if (registerTask===-3) {
+//             let registerTask = await DataTask.registerTask(dtotask);
+//             if (registerTask===-1) {
+//                 throw new
+//                  Error("The Priority must be High , Medium , Low ");
+//             }
+//             if (registerTask===-2) {
+//                 throw new 
+//                 Error("The End Date must be higher than Start Date");
+//             }
+//             if (registerTask===-3) {
+//                 throw new
+//                 Error("The Project does not exists");
+//             }
+//         console.log("Task registered successfully");
+//         }
+//     }
+//     registerTask().then()
+
+
+    // async function updateDescriptionNameTask() {
+
+    //         let idtask = 1;
+    //         let taskname = "TaskNameUpdate";
+    //         let descriptiontask = "ProjectDescriptionnTaskUpdate";
+           
+
+    //         let updateDescriptionNameTask =
+    //          await DataTask.updateDescriptionNameTask(idtask,taskname,descriptiontask);
+    //         if (updateDescriptionNameTask===-1) {
+    //             throw new
+    //              Error("The Task does not exists");
+    //         }
+    //         console.log("Task updated successfully");
+    //     }
+   
+    //     updateDescriptionNameTask().then()
+
+
+    //  async function updateEndDateTask() {
+
+    
+    //     let idtask = 9;
+    //     let end_date = '2023-08-30';
+      
+
+    //     let updateEndDateTask =
+    //      await DataTask.updateEndDateTask(idtask,end_date);
+    //     if (updateEndDateTask===-1) {
+    //         throw new
+    //          Error("The Task does not exists");
+    //     }
+    //     if (updateEndDateTask===-2) {
+    //         throw new
+    //         Error("The End Date must be higher than Start Date");
+    //     }
+    //     console.log("Task updated successfully");
+    // }
+
+    // updateEndDateTask().then()
+
+    //    async function updatePriorityTask() {
+
+    
+    //    let idtask = 8;
+    //     let priority = 'High';
+
+    //     let updatePriorityTask =
+    //      await DataTask.updatePriorityTask(idtask,priority);
+    //     if (updatePriorityTask===-1) {
+    //         throw new
+    //          Error("The Task does not exists");
+    //     }
+    //     if (updatePriorityTask===-2) {
+    //         throw new
+    //          Error("The Priority must be High , Medium , Low");
+    //     }
+    //     console.log("Task updated successfully");
+    // }
+
+    // updatePriorityTask().then()
+
+
+//    async function updateTaskOwner() {
+
+    
+//        let idtask = 17;
+//         let Task_owner = 'TaskOwnerNameUpdate';
+
+//         let updateTaskOwner =
+//          await DataTask.updateTaskOwner(idtask,Task_owner);
+//         if (updateTaskOwner===-1) {
+//             throw new
+//              Error("The Task does not exists");
+//         }
+      
+//         console.log("Task updated successfully");
+//     }
+
+//     updateTaskOwner().then()
+
+
+
+    //    async function completeTask() {
+
+    
+    //    let idtask = 8;
+     
+
+    //     let completeTask =
+    //      await DataTask.completeTask(idtask);
+    //     if (completeTask===-1) {
+    //         throw new
+    //          Error("The Task does not exists");
+    //     }
+       
+    //     console.log("Task updated successfully");
+    // }
+
+    // completeTask().then()
+
+    
+
+
+    //    async function onholdTask() {
+
+    
+    //    let idtask = 9;
+     
+
+    //     let onholdTask =
+    //      await DataTask.onholdTask(idtask);
+    //     if (onholdTask===-1) {
+    //         throw new
+    //          Error("The Task does not exists");
+    //     }
+       
+    //     console.log("Task updated successfully");
+    // }
+
+    // onholdTask().then()
+
+
+
+
+    //     async function cancelTask() {
+
+    
+    //    let idtask = 10;
+     
+
+    //     let cancelTask =
+    //      await DataTask.cancelTask(idtask);
+    //     if (cancelTask===-1) {
+    //         throw new
+    //          Error("The Task does not exists");
+    //     }
+       
+    //     console.log("Task updated successfully");
+    // }
+
+    // cancelTask().then()
+
+
+
+    //  async function getTaskById() {
+
+    //         let getTaskById =
+    //         await DataTask.getTaskById(1);
+    //         console.log(getTaskById);
+    // }
+    // getTaskById().then()
+
+
+    //      async function getTaskByStatus() {
+
+    //         let getTaskByStatus =
+    //         await DataTask.getTaskByStatus("On");
+    //         console.log(getTaskByStatus);
+    // }
+    // getTaskByStatus().then()
+
+
+    //  async function getTaskByOwnerName() {
+
+    //         let getTaskByOwnerName =
+    //         await DataTask.getTaskByOwnerName("Task_owner6");
+    //         console.log(getTaskByOwnerName);
+    // }
+    // getTaskByOwnerName().then()
+
+
+    //  async function getTasks() {
+
+    //         let getTasks =
+    //         await DataTask.getTasks();
+    //         console.log(getTasks);
+    // }
+    // getTasks().then()
+
+    
+     async function getTasksByProject() {
+
+            let getTasksByProject =
+            await DataTask.getTasksByProject(8);
+            if (getTasksByProject===-1) {
                 throw new
                 Error("The Project does not exists");
-            }
-        console.log("Task registered successfully");
-        }
+             }
+            console.log(getTasksByProject);
     }
-    registerTask().then()
+    getTasksByProject().then()
+
+
+
 
 //#endregion TASK
 
