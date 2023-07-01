@@ -582,7 +582,108 @@ class DataTask
             return arrayn;
             
     }
+    static  getTasksHighPriority=async()=>
+    {
+        let arrayn=[];
 
+        let queryinsert = `
+  
+        SELECT 
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate,
+        P.Project_name
+        FROM Tasks T
+        INNER JOIN Projects P ON T.ID_project = P.ID_project
+         WHERE T.Priorityy = 'High'
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+        .query(queryinsert)
+        for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+        return arrayn;
+        
+    }
+    static  getProjectsMediumPriority=async()=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+  
+        SELECT 
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate,
+        P.Project_name
+        FROM Tasks T
+        INNER JOIN Projects P ON T.ID_project = P.ID_project
+         WHERE T.Priorityy = 'Medium'
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+        .query(queryinsert)
+        for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+        return arrayn;
+        
+    }
+    static  getProjectsLowPriority=async()=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+  
+        SELECT 
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate,
+        P.Project_name
+        FROM Tasks T
+        INNER JOIN Projects P ON T.ID_project = P.ID_project
+         WHERE T.Priorityy = 'Low'
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+        .query(queryinsert)
+        for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+        return arrayn;
+        
+    }
 
     //GET INFORMATION        
     static getInformation(dtoproject,result)

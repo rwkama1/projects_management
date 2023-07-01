@@ -489,18 +489,45 @@ const { DTOTask } = require("./entity/DTOTask");
     // getTasks().then()
 
     
-     async function getTasksByProject() {
+    //  async function getTasksByProject() {
 
-            let getTasksByProject =
-            await DataTask.getTasksByProject(8);
-            if (getTasksByProject===-1) {
-                throw new
-                Error("The Project does not exists");
-             }
-            console.log(getTasksByProject);
-    }
-    getTasksByProject().then()
+    //         let getTasksByProject =
+    //         await DataTask.getTasksByProject(8);
+    //         if (getTasksByProject===-1) {
+    //             throw new
+    //             Error("The Project does not exists");
+    //          }
+    //         console.log(getTasksByProject);
+    // }
+    // getTasksByProject().then()
 
+
+    //   async function getTasksHighPriority() {
+
+    //         let getTasksHighPriority =
+    //         await DataTask.getTasksHighPriority();
+           
+    //         console.log(getTasksHighPriority);
+    // }
+    // getTasksHighPriority().then()
+
+    //     async function getProjectsMediumPriority() {
+
+    //         let getProjectsMediumPriority =
+    //         await DataTask.getProjectsMediumPriority();
+        
+    //         console.log(getProjectsMediumPriority);
+    // }
+    // getProjectsMediumPriority().then()
+
+    // async function getProjectsLowPriority() {
+
+    //     let getProjectsLowPriority =
+    //     await DataTask.getProjectsLowPriority();
+    
+    //     console.log(getProjectsLowPriority);
+    // }
+    // getProjectsLowPriority().then()
 
 
 
