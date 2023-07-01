@@ -711,7 +711,7 @@ class DataProject
           return arrayn;
         
     }
-    static  getProjectsDelayed=async()=>
+    static  getProjectsOverdue=async()=>
     {
         let arrayn=[];
 
@@ -729,7 +729,7 @@ class DataProject
             P.Client,
             P.Budget
             FROM Projects P   
-            WHERE End_date < GETDATE() AND Statuss = 'Pending'
+            WHERE End_date < GETDATE() AND Statuss <> 'Completed'
 
         `
         let pool = await Conection.conection();
@@ -743,7 +743,40 @@ class DataProject
           return arrayn;
         
     }
+    static  getProjectsSearchNameDesc=async(projectname="",projectdesc="")=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
   
+        SELECT 
+        P.ID_project, 
+        P.Project_name,
+        P.Descriptionn,
+        P.Start_datee,
+        P.End_date,
+        P.Statuss,
+        P.Project_manager,
+        P.Priorityy,
+        P.Client,
+        P.Budget
+        FROM Projects P   
+        WHERE  
+        P.Project_name LIKE '%${projectname}%'
+        AND  P.Descriptionn LIKE '%${projectdesc}%'
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+         .query(queryinsert)
+         for (let re of result.recordset) {
+            let dtoproject = new DTOProject();   
+            this.getInformation(dtoproject,re);
+            arrayn.push(dtoproject);
+         }
+          return arrayn;
+        
+    }
     //GET INFORMATION
             
     static getInformation(dtoproject,result)

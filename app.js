@@ -252,14 +252,14 @@ const { DTOTask } = require("./entity/DTOTask");
         //       getProjectsByBudgetRange().then()
 
 
-            //  async function getProjectsDelayed() {
+            //  async function getProjectsOverdue() {
 
          
-            // let getProjectsDelayed =
-            // await DataProject.getProjectsDelayed();
-            // console.log(getProjectsDelayed);
+            // let getProjectsOverdue =
+            // await DataProject.getProjectsOverdue();
+            // console.log(getProjectsOverdue);
             //  }
-            //  getProjectsDelayed().then()
+            //  getProjectsOverdue().then()
 
 //  async function calculateProjectDuration() {
 
@@ -269,7 +269,14 @@ const { DTOTask } = require("./entity/DTOTask");
 //         }
 //     calculateProjectDuration().then()
     
+    //      async function getProjectsSearchNameDesc() {
 
+        
+    //         let getProjectsSearchNameDesc =
+    //         await DataProject.getProjectsSearchNameDesc("1","");
+    //         console.log(getProjectsSearchNameDesc);
+    // }
+    // getProjectsSearchNameDesc().then()
 
 // // //#endregion PROJECTS
 
@@ -529,7 +536,25 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getProjectsLowPriority().then()
 
+    //     async function getTasksByDateRange() {
 
+    //         let startdate='2023-06-26';
+    //         let enddate='2023-07-26';
+    //         let getTasksByDateRange =
+    //         await DataTask.getTasksByDateRange(startdate,enddate);
+    //         console.log(getTasksByDateRange);
+    // }
+    // getTasksByDateRange().then()
+
+
+    //      async function getTasksSearchNameDesc() {
+
+        
+    //         let getTasksSearchNameDesc =
+    //         await DataTask.getTasksSearchNameDesc("","");
+    //         console.log(getTasksSearchNameDesc);
+    // }
+    // getTasksSearchNameDesc().then()
 
 //#endregion TASK
 
