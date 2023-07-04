@@ -60,7 +60,6 @@ class DataProject
         return resultquery;
         
     }
-    
     static  updateDescriptionNameProject=async(idproject,projectname,description)=>
     {
        

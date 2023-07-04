@@ -1,10 +1,12 @@
 
+const { DataMember } = require("./data/DataMember");
 const { DataProject } = require("./data/DataProject");
 const { DataTask } = require("./data/DataTask");
+const { DTOMember } = require("./entity/DTOMember");
 const { DTOProject } = require("./entity/DTOProject");
 const { DTOTask } = require("./entity/DTOTask");
 
-// // //#region PROJECTS
+//#region PROJECTS
 
 
     // async function registerProject() {
@@ -556,5 +558,66 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getTasksSearchNameDesc().then()
 
+
+
+    //         async function getTasksOverdue() {
+
+        
+    //         let getTasksOverdue =
+    //         await DataTask.getTasksOverdue();
+    //         console.log(getTasksOverdue);
+    // }
+    // getTasksOverdue().then()
+
+    
+
 //#endregion TASK
 
+//region MEMBERS
+
+ async function registerMember() {
+
+        for (let index = 1; index < 20; index++) {
+
+            let dtomember = new DTOMember();
+            dtomember.First_name = "First_name" + index.toString();
+            dtomember.Last_name = "Last_name" + index.toString();
+            dtomember.Department = `Department${index}`;
+            dtomember.Email = `email${index}@gmail.com`;
+            dtomember.Position = `Position${index}`;
+          
+            let registerMember = await DataMember.registerMember(dtomember);
+            if (registerMember===-1) {
+                throw new
+                 Error("Incorrect Email");
+            }
+            if (registerMember===-2) {
+                throw new
+                 Error("Email already exists in the system");
+            }
+            console.log("Member registered successfully");
+        }
+    }
+    registerMember().then()
+
+    //   async function updateMemberName() {
+
+    //         let idmember = 12;
+    //         let memberfirstname = "FirstNameUpdate";
+    //         let memberlastname = "LastNameUpdate";
+           
+
+    //         let updateMemberName =
+    //          await DataMember.updateMemberName(idmember,memberfirstname,memberlastname);
+    //         if (updateMemberName===-1) {
+    //             throw new
+    //              Error("The Memmber does not exists");
+    //         }
+    //         console.log("Memmber updated successfully");
+    //     }
+   
+    //     updateMemberName().then()
+
+
+
+//#endregion MEMBERS

@@ -1,6 +1,5 @@
 const { Date } = require("mssql");
 const { DTOTask } = require("../entity/DTOTask");
-
 const { Conection } = require("./Connection");
 
 class DataTask
@@ -721,6 +720,42 @@ class DataTask
         return arrayn;
         
     }
+    static  getTasksOverdue=async()=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+  
+        SELECT 
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate,
+        P.Project_name
+        FROM Tasks T
+        INNER JOIN Projects P ON T.ID_project = P.ID_project
+        WHERE T.End_date < GETDATE() AND T.Statuss <> 'Completed'
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+       
+      
+        .query(queryinsert)
+        for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+        return arrayn;
+        
+    }
     static  getTasksSearchNameDesc=async(taskname="",taskdesc="")=>
     {
         let arrayn=[];
@@ -757,6 +792,7 @@ class DataTask
         return arrayn;
         
     }
+    
     //GET INFORMATION 
 
     static getInformation(dtoproject,result)
