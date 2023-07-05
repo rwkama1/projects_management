@@ -49,9 +49,9 @@ const { DTOTask } = require("./entity/DTOTask");
     //         let description = "ProjectDescriptionnUpdate";
            
 
-    //         let registerProject =
+    //         let updateDescriptionNameProject =
     //          await DataProject.updateDescriptionNameProject(idproject,projectname,description);
-    //         if (registerProject===-1) {
+    //         if (updateDescriptionNameProject===-1) {
     //             throw new
     //              Error("The Project does not exists");
     //         }
@@ -575,30 +575,30 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //region MEMBERS
 
- async function registerMember() {
+//  async function registerMember() {
 
-        for (let index = 1; index < 20; index++) {
+//         for (let index = 1; index < 20; index++) {
 
-            let dtomember = new DTOMember();
-            dtomember.First_name = "First_name" + index.toString();
-            dtomember.Last_name = "Last_name" + index.toString();
-            dtomember.Department = `Department${index}`;
-            dtomember.Email = `email${index}@gmail.com`;
-            dtomember.Position = `Position${index}`;
+//             let dtomember = new DTOMember();
+//             dtomember.First_name = "First_name" + index.toString();
+//             dtomember.Last_name = "Last_name" + index.toString();
+//             dtomember.Department = `Department${index}`;
+//             dtomember.Email = `email${index}@gmail.com`;
+//             dtomember.Position = `Position${index}`;
           
-            let registerMember = await DataMember.registerMember(dtomember);
-            if (registerMember===-1) {
-                throw new
-                 Error("Incorrect Email");
-            }
-            if (registerMember===-2) {
-                throw new
-                 Error("Email already exists in the system");
-            }
-            console.log("Member registered successfully");
-        }
-    }
-    registerMember().then()
+//             let registerMember = await DataMember.registerMember(dtomember);
+//             if (registerMember===-1) {
+//                 throw new
+//                  Error("Incorrect Email");
+//             }
+//             if (registerMember===-2) {
+//                 throw new
+//                  Error("Email already exists in the system");
+//             }
+//             console.log("Member registered successfully");
+//         }
+//     }
+//     registerMember().then()
 
     //   async function updateMemberName() {
 
@@ -618,6 +618,85 @@ const { DTOTask } = require("./entity/DTOTask");
    
     //     updateMemberName().then()
 
+//   async function updateMemberDepartament() {
+
+//             let idmember = 11;
+//             let departament = "DepartamentUpdate";
+            
+//             let updateMemberDepartament =
+//              await DataMember.updateMemberDepartament(idmember,departament);
+//             if (updateMemberDepartament===-1) {
+//                 throw new
+//                  Error("The Memmber does not exists");
+//             }
+//             console.log("Member updated successfully");
+//         }
+   
+//         updateMemberDepartament().then()
+
+        // async function updateMemberPosition() {
+
+        //     let idmember = 12;
+        //     let position = "PositionUpdate";
+            
+        //     let updateMemberPosition =
+        //      await DataMember.updateMemberPosition(idmember,position);
+        //     if (updateMemberPosition===-1) {
+        //         throw new
+        //          Error("The Memmber does not exists");
+        //     }
+        //     console.log("Member updated successfully");
+        // }
+   
+        // updateMemberPosition().then()
+
+
+    //  async function getMemberById() {
+
+    //         let getMemberById =
+    //         await DataMember.getMemberById(11);
+    //         console.log(getMemberById);
+
+    //      }
+    // getMemberById().then()
+
+        //  async function getMemberByPosition() {
+
+        //     let getMemberByPosition =
+        //     await DataMember.getMemberByPosition("Position7");
+        //     console.log(getMemberByPosition);
+
+        //  }
+        //  getMemberByPosition().then()
+
+         
+        //  async function getMemberByDepartament() {
+
+        //     let getMemberByDepartament =
+        //     await DataMember.getMemberByDepartament("Department19");
+        //     console.log(getMemberByDepartament);
+
+        //  }
+        //  getMemberByDepartament().then()
+
+        // async function getMemberByName() {
+
+        //     let getMemberByName =
+        //     await DataMember.getMemberByName("","");
+        //     console.log(getMemberByName);
+
+        //  }
+        //  getMemberByName().then()
+
+
+        //  async function getMemberAll() {
+
+        //     let getMemberAll =
+        //     await DataMember.getMemberAll();
+        //     console.log(getMemberAll);
+
+        //  }
+        //  getMemberAll().then()
 
 
 //#endregion MEMBERS
