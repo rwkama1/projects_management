@@ -1,7 +1,9 @@
 
+const { DataAssignments } = require("./data/DataAssignment");
 const { DataMember } = require("./data/DataMember");
 const { DataProject } = require("./data/DataProject");
 const { DataTask } = require("./data/DataTask");
+const { DTOAssignments } = require("./entity/DTOAssignment");
 const { DTOMember } = require("./entity/DTOMember");
 const { DTOProject } = require("./entity/DTOProject");
 const { DTOTask } = require("./entity/DTOTask");
@@ -700,3 +702,59 @@ const { DTOTask } = require("./entity/DTOTask");
 
 
 //#endregion MEMBERS
+
+//#region ASSIGNMENTS
+
+// async function registerAssignments() {
+
+//         for (let index = 20; index < 50; index++) {
+
+//             let dtoAssignments = new DTOAssignments();
+//             dtoAssignments.ID_assignment = index;
+//             dtoAssignments.ID_member = index;
+//             dtoAssignments.ID_task = index;
+//             dtoAssignments.Worked_hours = index;
+//             dtoAssignments.Assignment_date = `2023-07-${index}`;
+
+//             let registerAssignments = await DataAssignments.registerAssignments
+//             (dtoAssignments);
+//             if (registerAssignments===-1) {
+//                 throw new
+//                  Error("Task not Found");
+//             }
+//             if (registerAssignments===-2) {
+//                 throw new 
+//                 Error("Member not Found");
+//             }
+//             if (registerAssignments===-3) {
+//                 throw new 
+//                 Error("The assignment date must be greater than or equal to the current date");
+//             }
+//                 console.log("Assignment registered successfully");
+//         }
+//     }
+//     registerAssignments().then()
+
+// async function updateAssignmentDate() {
+
+//             let ID_assignment = 11;
+//             let Assignment_date = `2023-07-07`;
+            
+
+//             let updateAssignmentDate = await DataAssignments.updateAssignmentDate
+//             (ID_assignment,Assignment_date);
+//             if (updateAssignmentDate===-1) {
+//                 throw new
+//                  Error("Assignment not Found");
+//             }
+//             if (updateAssignmentDate===-2) {
+//                 throw new 
+//               Error("The assignment date must be greater than or equal to the current date");
+//             }
+//                 console.log("Assignment updated successfully");
+       
+//     }
+//     updateAssignmentDate().then()
+
+
+//#endregion ASSIGNMENTS

@@ -109,6 +109,7 @@ go
 --DROP TABLE Attachments;
 
 
+
 SELECT * FROM Projects;
 SELECT * FROM Tasks;
 SELECT * FROM Members;
@@ -118,4 +119,35 @@ SELECT * FROM Resources;
 SELECT * FROM ResourceAssignments;
 SELECT * FROM Comments;
 SELECT * FROM Attachments;
+
+
+	
+DECLARE @ID_task INT = 50;
+DECLARE @ID_member INT = 1;
+DECLARE @Assignment_date DATE = '2023-07-06';
+DECLARE @Worked_hours INT = 3;
+DECLARE @Current_date DATE = GETDATE();
+
+IF NOT EXISTS (SELECT 1 FROM Tasks WHERE ID_task = @ID_task)
+BEGIN
+    SELECT -1 AS TaskNotFound;
+    RETURN;
+END
+
+IF NOT EXISTS (SELECT 1 FROM Members WHERE ID_member = @ID_member)
+BEGIN
+    SELECT -2 AS MemberNotFound;
+    RETURN;
+END
+
+IF @Assignment_date < @Current_date
+BEGIN
+    SELECT -3 AS InvalidAssignmentDate;
+    RETURN;
+END
+
+INSERT INTO Assignments (ID_task, ID_member, Assignment_date, Worked_hours)
+VALUES (@ID_task, @ID_member, @Assignment_date, @Worked_hours);
+
+SELECT 1 AS InsertSuccess;
 

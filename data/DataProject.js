@@ -445,7 +445,6 @@ class DataProject
          return resultquery;
         
     }
-
     static  getProjects=async()=>
     {
         let arrayn=[];
