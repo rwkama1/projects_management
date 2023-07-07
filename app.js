@@ -282,6 +282,26 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getProjectsSearchNameDesc().then()
 
+
+        
+    //      async function getProjectWithMostTasks() {
+
+        
+    //         let getProjectWithMostTasks =
+    //         await DataProject.getProjectWithMostTasks();
+    //         console.log(getProjectWithMostTasks);
+    // }
+    // getProjectWithMostTasks().then()
+
+   async function getProjectsByMemberNameLastName() {
+
+            let getProjectsByMemberNameLastName =
+            await DataProject.getProjectsByMemberNameLastName();
+            console.log(getProjectsByMemberNameLastName);
+    }
+    getProjectsByMemberNameLastName().then()
+
+
 // // //#endregion PROJECTS
 
 //#region TASK
@@ -735,6 +755,7 @@ const { DTOTask } = require("./entity/DTOTask");
 //     }
 //     registerAssignments().then()
 
+
 // async function updateAssignmentDate() {
 
 //             let ID_assignment = 11;
@@ -754,7 +775,27 @@ const { DTOTask } = require("./entity/DTOTask");
 //                 console.log("Assignment updated successfully");
        
 //     }
-//     updateAssignmentDate().then()
+//  updateAssignmentDate().then()
+
+
+// async function updateAssignmentWorked_hours() {
+
+//             let ID_assignment = 11;
+//             let Worked_hours = 5;
+            
+
+//             let updateAssignmentWorked_hours =
+//              await DataAssignments.updateAssignmentWorked_hours
+//             (ID_assignment,Worked_hours);
+//             if (updateAssignmentWorked_hours===-1) {
+//                 throw new
+//                  Error("Assignment not Found");
+//             }
+            
+//          console.log("Assignment updated successfully");
+       
+//     }
+// updateAssignmentWorked_hours().then()
 
 
 //#endregion ASSIGNMENTS

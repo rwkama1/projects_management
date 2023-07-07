@@ -63,7 +63,6 @@ class DataAssignments
            return resultquery;
            
        }
-       
        static  updateAssignmentDate=async(ID_assignment,Assignment_date)=>
        {
           
@@ -110,8 +109,46 @@ class DataAssignments
            return resultquery;
            
        }
+       static  updateAssignmentWorked_hours=async(ID_assignment,Worked_hours)=>
+       {
+          
+           let resultquery;
+           let queryinsert = `
+   
+                DECLARE @ID_assignment INT = ${ID_assignment};
+                DECLARE @Worked_hours int = '${Worked_hours}';
+               
+           
+                IF NOT EXISTS (SELECT 1 FROM Assignments
+                     WHERE ID_assignment = @ID_assignment)
+                BEGIN
+                    SELECT -1 AS AssignmentNotFound;
+                    RETURN;
+                END
+
+                UPDATE Assignments SET
+                Worked_hours = @Worked_hours
+                WHERE ID_assignment = @ID_assignment;
+           
+                SELECT 1 AS updatesucess;
+   
+             `;
+             let pool = await Conection.conection();
+               const result = await pool.request()
+               .query(queryinsert)
+               resultquery = result.recordset[0].AssignmentNotFound;
+               if(resultquery===undefined)
+               {  
+                    resultquery = result.recordset[0].InsertSuccess;
+               }
+           pool.close();
+           return resultquery;
+           
+       }
 
        //GET
+
+
 
       //GET INFORMATION
                 

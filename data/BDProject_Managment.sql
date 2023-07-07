@@ -121,6 +121,34 @@ SELECT * FROM Comments;
 SELECT * FROM Attachments;
 
 
+
+
+   SELECT P.ID_project, 
+        P.Project_name,
+        P.Descriptionn,
+        P.Start_datee,
+        P.End_date,
+        P.Statuss,
+        P.Project_manager,
+        P.Priorityy,
+        P.Client,
+        P.Budget,
+        COUNT(T.ID_task) AS TaskCount
+        FROM Projects P
+        INNER JOIN Tasks T ON P.ID_project = T.ID_project
+        INNER JOIN Assignments A ON T.ID_task = A.ID_task
+        INNER JOIN Members M ON A.ID_member = M.ID_member
+        WHERE M.First_name LIKE 
+         '%1%'
+        AND M.Last_name LIKE   '%1%'
+        GROUP BY P.ID_project, P.Project_name, P.Descriptionn, P.Start_datee, 
+        P.End_date, P.Statuss, P.Project_manager, 
+        P.Priorityy, P.Client, P.Budget
+        ORDER BY TaskCount DESC
+
+
+
+
 	
 DECLARE @ID_task INT = 50;
 DECLARE @ID_member INT = 1;

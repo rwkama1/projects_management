@@ -477,6 +477,44 @@ class DataProject
           return arrayn;
         
     }
+    static  getProjectWithMostTasks=async()=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+  
+        SELECT
+        P.ID_project, 
+        P.Project_name,
+        P.Descriptionn,
+        P.Start_datee,
+        P.End_date,
+        P.Statuss,
+        P.Project_manager,
+        P.Priorityy,
+        P.Client,
+        P.Budget,
+        COUNT(T.ID_task) AS TaskCount
+        FROM Projects P
+        INNER JOIN Tasks T ON P.ID_project = T.ID_project
+        GROUP BY P.ID_project, P.Project_name, P.Descriptionn, 
+        P.Start_datee, P.End_date, P.Statuss, P.Project_manager,
+        P.Priorityy, P.Client, P.Budget
+        ORDER BY TaskCount DESC
+    
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+         .query(queryinsert)
+         for (let re of result.recordset) {
+            let dtoproject = new DTOProject();   
+            this.getInformation(dtoproject,re);
+            arrayn.push(dtoproject);
+         }
+          return arrayn;
+        
+    }
     static  getProjectsHighPriority=async()=>
     {
         let arrayn=[];
@@ -741,14 +779,14 @@ class DataProject
           return arrayn;
         
     }
-    static  getProjectsSearchNameDesc=async(projectname="",projectdesc="")=>
+
+    static  getProjectsByMemberNameLastName=async(firstname="",lastname="")=>
     {
         let arrayn=[];
 
         let queryinsert = `
   
-        SELECT 
-        P.ID_project, 
+        SELECT P.ID_project, 
         P.Project_name,
         P.Descriptionn,
         P.Start_datee,
@@ -757,12 +795,19 @@ class DataProject
         P.Project_manager,
         P.Priorityy,
         P.Client,
-        P.Budget
-        FROM Projects P   
-        WHERE  
-        P.Project_name LIKE '%${projectname}%'
-        AND  P.Descriptionn LIKE '%${projectdesc}%'
-
+        P.Budget,
+        COUNT(T.ID_task) AS TaskCount
+        FROM Projects P
+        INNER JOIN Tasks T ON P.ID_project = T.ID_project
+        INNER JOIN Assignments A ON T.ID_task = A.ID_task
+        INNER JOIN Members M ON A.ID_member = M.ID_member
+        WHERE M.First_name LIKE 
+        '%${firstname}%'
+        AND M.Last_name LIKE '%${lastname}%'
+        GROUP BY P.ID_project, P.Project_name, P.Descriptionn, P.Start_datee, 
+        P.End_date, P.Statuss, P.Project_manager, 
+        P.Priorityy, P.Client, P.Budget, COUNT(T.ID_task)
+        ORDER BY TaskCount DESC
         `
         let pool = await Conection.conection();
         const result = await pool.request()
@@ -775,6 +820,8 @@ class DataProject
           return arrayn;
         
     }
+
+
     //GET INFORMATION
             
     static getInformation(dtoproject,result)
@@ -789,7 +836,7 @@ class DataProject
         dtoproject.Priorityy = result.Priorityy;
         dtoproject.Client = result.Client;
         dtoproject.Budget = result.Budget;
-
+        dtoproject.TaskCount = result.TaskCount;
        
         
     }
