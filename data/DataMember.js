@@ -331,6 +331,70 @@ class DataMember
               return arrayn;
            
        }
+       
+       static  getMembersByTaskName=async(taskname="")=>
+       {
+           let arrayn=[];
+   
+           let queryinsert = `
+     
+            SELECT 
+            M.ID_member, 
+            M.First_name,
+            M.Last_name,
+            M.Position,
+            M.Department,
+            M.Email
+            FROM Members M
+            JOIN Assignments A ON M.ID_member = A.ID_member
+            JOIN Tasks T ON A.ID_task = T.ID_task
+            WHERE T.Task_name LIKE '%${taskname}%'
+       
+  
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtomember = new DTOMember();   
+                this.getInformation(dtomember,re);
+                arrayn.push(dtomember);
+             }
+              return arrayn;
+           
+       }
+       static  getMembersByProjectName=async(projectname="")=>
+       {
+           let arrayn=[];
+   
+           let queryinsert = `
+     
+            SELECT 
+            M.ID_member, 
+            M.First_name,
+            M.Last_name,
+            M.Position,
+            M.Department,
+            M.Email
+            FROM Members M
+            JOIN Assignments A ON M.ID_member = A.ID_member
+            JOIN Tasks T ON A.ID_task = T.ID_task
+            JOIN Projects P ON T.ID_project = P.ID_project
+            WHERE P.Project_name LIKE '%${projectname}%'
+       
+  
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtomember = new DTOMember();   
+                this.getInformation(dtomember,re);
+                arrayn.push(dtomember);
+             }
+              return arrayn;
+           
+       }
       //GET INFORMATION
                 
         static getInformation(dtomember, result) {

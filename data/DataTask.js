@@ -792,22 +792,64 @@ class DataTask
         return arrayn;
         
     }
-    
+    static  getAssignedTasks=async(firstname="",lastname="")=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+  
+        SELECT 
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate,
+        P.Project_name,
+        M.First_name,
+        M.Last_name
+        FROM Tasks T
+        JOIN Assignments A ON T.ID_task = A.ID_task
+        JOIN Members M ON A.ID_member = M.ID_member
+        JOIN Projects P ON T.ID_project = P.ID_project
+        WHERE 
+        M.First_name LIKE '%${firstname}%'
+        AND M.Last_name LIKE '%${lastname}%'
+
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+        .query(queryinsert)
+        for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+        return arrayn;
+        
+    }
     //GET INFORMATION 
 
-    static getInformation(dtoproject,result)
+    static getInformation(dtotask,result)
     {
-        dtoproject.ID_task = result.ID_task;
-        dtoproject.Task_name = result.Task_name;
-        dtoproject.Descriptionn = result.Descriptionn;
-        dtoproject.Start_datee = result.Start_datee;
-        dtoproject.End_date = result.End_date;
-        dtoproject.Statuss = result.Statuss;
-        dtoproject.Task_owner = result.Task_owner;
-        dtoproject.Priorityy = result.Priorityy;
-        dtoproject.Hours_estimate = result.Hours_estimate;
-        dtoproject.ID_project = result.ID_project;
-        dtoproject.Project_name = result.Project_name;
+        dtotask.ID_task = result.ID_task;
+        dtotask.Task_name = result.Task_name;
+        dtotask.Descriptionn = result.Descriptionn;
+        dtotask.Start_datee = result.Start_datee;
+        dtotask.End_date = result.End_date;
+        dtotask.Statuss = result.Statuss;
+        dtotask.Task_owner = result.Task_owner;
+        dtotask.Priorityy = result.Priorityy;
+        dtotask.Hours_estimate = result.Hours_estimate;
+        dtotask.ID_project = result.ID_project;
+        dtotask.Project_name = result.Project_name;
+        dtotask.First_name = result.First_name;
+        dtotask.Last_name = result.Last_name;
    
     }
 }
