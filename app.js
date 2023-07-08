@@ -293,14 +293,14 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getProjectWithMostTasks().then()
 
-        async function getProjectsByMember() {
+    //     async function getProjectsByMember() {
 
         
-            let getProjectsByMember =
-            await DataProject.getProjectsByMember("1","1");
-            console.log(getProjectsByMember);
-    }
-    getProjectsByMember().then()
+    //         let getProjectsByMember =
+    //         await DataProject.getProjectsByMember(6);
+    //         console.log(getProjectsByMember);
+    // }
+    // getProjectsByMember().then()
 
 
 
@@ -597,7 +597,7 @@ const { DTOTask } = require("./entity/DTOTask");
     // async function getAssignedTasks() {
 
     //     let getAssignedTasks =
-    //     await DataTask.getAssignedTasks();
+    //     await DataTask.getAssignedTasks(6);
     //     console.log(getAssignedTasks);
     // }
     // getAssignedTasks().then()
@@ -731,21 +731,21 @@ const { DTOTask } = require("./entity/DTOTask");
         //  }
         //  getMemberAll().then()
 
-    // async function getMembersByTaskName() {
+    // async function getMembersByTask() {
 
-    //     let getMembersByTaskName =
-    //     await DataMember.getMembersByTaskName();
-    //     console.log(getMembersByTaskName);
+    //     let getMembersByTask =
+    //     await DataMember.getMembersByTask(6);
+    //     console.log(getMembersByTask);
     // }
-    // getMembersByTaskName().then()
+    // getMembersByTask().then()
 
-    //     async function getMembersByProjectName() {
+    //     async function getMembersByProject() {
 
-    //     let getMembersByProjectName =
-    //     await DataMember.getMembersByProjectName("1");
-    //     console.log(getMembersByProjectName);
+    //     let getMembersByProject =
+    //     await DataMember.getMembersByProject(6);
+    //     console.log(getMembersByProject);
     // }
-    // getMembersByProjectName().then()
+    // getMembersByProject().then()
 
 
 

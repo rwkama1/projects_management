@@ -792,7 +792,7 @@ class DataTask
         return arrayn;
         
     }
-    static  getAssignedTasks=async(firstname="",lastname="")=>
+    static  getAssignedTasks=async(idmember)=>
     {
         let arrayn=[];
 
@@ -816,11 +816,9 @@ class DataTask
         JOIN Assignments A ON T.ID_task = A.ID_task
         JOIN Members M ON A.ID_member = M.ID_member
         JOIN Projects P ON T.ID_project = P.ID_project
-        WHERE 
-        M.First_name LIKE '%${firstname}%'
-        AND M.Last_name LIKE '%${lastname}%'
-
-
+        WHERE
+        M.ID_member = ${idmember}
+       
         `
         let pool = await Conection.conection();
         const result = await pool.request()

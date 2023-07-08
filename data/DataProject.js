@@ -779,7 +779,7 @@ class DataProject
           return arrayn;
         
     }
-    static  getProjectsByMember=async(firstname="",lastname="")=>
+    static  getProjectsByMember=async(idmember)=>
     {
         let arrayn=[];
 
@@ -800,9 +800,8 @@ class DataProject
             JOIN Tasks T ON P.ID_project = T.ID_project
             JOIN Assignments A ON T.ID_task = A.ID_task
             JOIN Members M ON A.ID_member = M.ID_member
-            WHERE M.First_name LIKE '%${firstname}%'
-              AND M.Last_name LIKE '%${lastname}%'
-            
+            WHERE M.ID_member=${idmember}
+
 
         `
         let pool = await Conection.conection();

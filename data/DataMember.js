@@ -332,12 +332,14 @@ class DataMember
            
        }
        
-       static  getMembersByTaskName=async(taskname="")=>
+       static  getMembersByTask=async(idtask)=>
        {
            let arrayn=[];
    
            let queryinsert = `
      
+            declare @idtask int=${idtask};
+
             SELECT 
             M.ID_member, 
             M.First_name,
@@ -348,7 +350,7 @@ class DataMember
             FROM Members M
             JOIN Assignments A ON M.ID_member = A.ID_member
             JOIN Tasks T ON A.ID_task = T.ID_task
-            WHERE T.Task_name LIKE '%${taskname}%'
+            WHERE T.ID_task = @idtask
        
   
            `
@@ -363,11 +365,13 @@ class DataMember
               return arrayn;
            
        }
-       static  getMembersByProjectName=async(projectname="")=>
+       static  getMembersByProject=async(idproject)=>
        {
            let arrayn=[];
    
            let queryinsert = `
+
+           declare @idproject int=${idproject};
      
             SELECT 
             M.ID_member, 
@@ -380,7 +384,7 @@ class DataMember
             JOIN Assignments A ON M.ID_member = A.ID_member
             JOIN Tasks T ON A.ID_task = T.ID_task
             JOIN Projects P ON T.ID_project = P.ID_project
-            WHERE P.Project_name LIKE '%${projectname}%'
+            WHERE P.ID_project=${idproject}
        
   
            `
