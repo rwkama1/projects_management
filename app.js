@@ -602,6 +602,21 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getAssignedTasks().then()
 
+    // async function getAssignedTasks() {
+
+    //     let getAssignedTasks =
+    //     await DataTask.getAssignedTasks(6);
+    //     console.log(getAssignedTasks);
+    // }
+    // getAssignedTasks().then()
+
+ async function getTaskProgress() {
+
+        let getTaskProgress =
+        await DataTask.getTaskProgress(1);
+        console.log(getTaskProgress);
+    }
+    getTaskProgress().then()
 
 
 //#endregion TASK
@@ -755,14 +770,14 @@ const { DTOTask } = require("./entity/DTOTask");
 
 // async function registerAssignments() {
 
-//         for (let index = 20; index < 50; index++) {
+      
 
 //             let dtoAssignments = new DTOAssignments();
-//             dtoAssignments.ID_assignment = index;
-//             dtoAssignments.ID_member = index;
-//             dtoAssignments.ID_task = index;
-//             dtoAssignments.Worked_hours = index;
-//             dtoAssignments.Assignment_date = `2023-07-${index}`;
+            
+//             dtoAssignments.ID_member = 2;
+//             dtoAssignments.ID_task = 1;
+//             dtoAssignments.Worked_hours = 1;
+//             dtoAssignments.Assignment_date = `2023-07-11`;
 
 //             let registerAssignments = await DataAssignments.registerAssignments
 //             (dtoAssignments);
@@ -778,9 +793,13 @@ const { DTOTask } = require("./entity/DTOTask");
 //                 throw new 
 //                 Error("The assignment date must be greater than or equal to the current date");
 //             }
+//             if (registerAssignments===-4) {
+//                 throw new 
+//                 Error("The hours worked for that task exceeds the estimated hours of the task ");
+//             }
 //                 console.log("Assignment registered successfully");
 //         }
-//     }
+    
 //     registerAssignments().then()
 
 
@@ -825,5 +844,6 @@ const { DTOTask } = require("./entity/DTOTask");
 //     }
 // updateAssignmentWorked_hours().then()
 
+     
 
 //#endregion ASSIGNMENTS

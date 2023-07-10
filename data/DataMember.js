@@ -1,4 +1,4 @@
-const { Date } = require("mssql");
+
 const { DTOMember } = require("../entity/DTOMember");
 const { Conection } = require("./Connection");
 
@@ -331,7 +331,6 @@ class DataMember
               return arrayn;
            
        }
-       
        static  getMembersByTask=async(idtask)=>
        {
            let arrayn=[];
@@ -399,6 +398,8 @@ class DataMember
               return arrayn;
            
        }
+     
+       
       //GET INFORMATION
                 
         static getInformation(dtomember, result) {

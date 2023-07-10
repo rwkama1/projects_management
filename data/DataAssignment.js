@@ -35,7 +35,24 @@ class DataAssignments
                SELECT -3 AS InvalidAssignmentDate;
                RETURN;
            END
-           
+
+            DECLARE @Hours_estimate INT;
+            DECLARE @Total_worked_hours INT;
+
+            SELECT @Hours_estimate = Hours_estimate
+            FROM Tasks
+            WHERE ID_task = @ID_task;
+
+            SELECT @Total_worked_hours = SUM(Worked_hours)
+            FROM Assignments
+            WHERE ID_task = @ID_task;
+
+            IF (@Worked_hours + ISNULL(@Total_worked_hours, 0)) > @Hours_estimate
+            BEGIN
+                SELECT -4 AS ExceededEstimation;
+                RETURN;
+            END
+
            INSERT INTO Assignments (ID_task, ID_member, Assignment_date, Worked_hours)
            VALUES (@ID_task, @ID_member, @Assignment_date, @Worked_hours);
            
@@ -55,7 +72,11 @@ class DataAssignments
                         if(resultquery===undefined)
                         {
                          resultquery = result.recordset[0].InsertSuccess;
-                        
+                            if(resultquery===undefined)
+                            {
+                            resultquery = result.recordset[0].ExceededEstimation;
+                            
+                            }
                         }
                     }
                }

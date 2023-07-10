@@ -477,44 +477,7 @@ class DataProject
           return arrayn;
         
     }
-    static  getProjectWithMostTasks=async()=>
-    {
-        let arrayn=[];
-
-        let queryinsert = `
   
-        SELECT
-        P.ID_project, 
-        P.Project_name,
-        P.Descriptionn,
-        P.Start_datee,
-        P.End_date,
-        P.Statuss,
-        P.Project_manager,
-        P.Priorityy,
-        P.Client,
-        P.Budget,
-        COUNT(T.ID_task) AS TaskCount
-        FROM Projects P
-        INNER JOIN Tasks T ON P.ID_project = T.ID_project
-        GROUP BY P.ID_project, P.Project_name, P.Descriptionn, 
-        P.Start_datee, P.End_date, P.Statuss, P.Project_manager,
-        P.Priorityy, P.Client, P.Budget
-        ORDER BY TaskCount DESC
-    
-
-        `
-        let pool = await Conection.conection();
-        const result = await pool.request()
-         .query(queryinsert)
-         for (let re of result.recordset) {
-            let dtoproject = new DTOProject();   
-            this.getInformation(dtoproject,re);
-            arrayn.push(dtoproject);
-         }
-          return arrayn;
-        
-    }
     static  getProjectsHighPriority=async()=>
     {
         let arrayn=[];
@@ -815,7 +778,44 @@ class DataProject
           return arrayn;
         
     }
-   
+    static  getProjectWithMostTasks=async()=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+  
+        SELECT
+        P.ID_project, 
+        P.Project_name,
+        P.Descriptionn,
+        P.Start_datee,
+        P.End_date,
+        P.Statuss,
+        P.Project_manager,
+        P.Priorityy,
+        P.Client,
+        P.Budget,
+        COUNT(T.ID_task) AS TaskCount
+        FROM Projects P
+        INNER JOIN Tasks T ON P.ID_project = T.ID_project
+        GROUP BY P.ID_project, P.Project_name, P.Descriptionn, 
+        P.Start_datee, P.End_date, P.Statuss, P.Project_manager,
+        P.Priorityy, P.Client, P.Budget
+        ORDER BY TaskCount DESC
+    
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+         .query(queryinsert)
+         for (let re of result.recordset) {
+            let dtoproject = new DTOProject();   
+            this.getInformation(dtoproject,re);
+            arrayn.push(dtoproject);
+         }
+          return arrayn;
+        
+    }
 
 
     //GET INFORMATION

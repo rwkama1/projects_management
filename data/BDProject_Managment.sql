@@ -120,37 +120,10 @@ SELECT * FROM ResourceAssignments;
 SELECT * FROM Comments;
 SELECT * FROM Attachments;
 
+delete from assignments where id_assignment=12
 
-
- declare @idtask int=6;
-
-            SELECT 
-            M.ID_member, 
-            M.First_name,
-            M.Last_name,
-            M.Position,
-            M.Department,
-            M.Email
-            FROM Members M
-            JOIN Assignments A ON M.ID_member = A.ID_member
-            JOIN Tasks T ON A.ID_task = T.ID_task
-            WHERE T.ID_task = @idtask
-
-
-
-			 SELECT 
-            P.ID_project, 
-            P.Project_name,
-            P.Descriptionn,
-            P.Start_datee,
-            P.End_date,
-            P.Statuss,
-            P.Project_manager,
-            P.Priorityy,
-            P.Client,
-            P.Budget
-            FROM Projects P
-            JOIN Tasks T ON P.ID_project = T.ID_project
-            JOIN Assignments A ON T.ID_task = A.ID_task
-            JOIN Members M ON A.ID_member = M.ID_member
-            WHERE M.ID_member=6
+  SELECT (SUM(A.Worked_hours) * 100) / T.Hours_estimate AS Progress
+    FROM Tasks T
+    JOIN Assignments A ON T.ID_task = A.ID_task
+    WHERE T.ID_task = 1
+    GROUP BY T.Hours_estimate

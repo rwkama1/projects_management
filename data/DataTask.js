@@ -831,6 +831,29 @@ class DataTask
         return arrayn;
         
     }
+    static  getTaskProgress=async(idtask)=>
+    {
+        let resultquery;
+
+        let queryinsert = `
+  
+        declare @TaskID INT=${idtask}
+
+        SELECT (SUM(A.Worked_hours) * 100) / T.Hours_estimate AS Progress
+        FROM Tasks T
+        JOIN Assignments A ON T.ID_task = A.ID_task
+        WHERE T.ID_task = @TaskID
+        GROUP BY T.Hours_estimate
+       
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+        .query(queryinsert)
+        resultquery = result.recordset[0].Progress;
+        pool.close();
+        return resultquery;
+        
+    }
     //GET INFORMATION 
 
     static getInformation(dtotask,result)
