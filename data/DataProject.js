@@ -477,7 +477,6 @@ class DataProject
           return arrayn;
         
     }
-  
     static  getProjectsHighPriority=async()=>
     {
         let arrayn=[];
@@ -816,8 +815,94 @@ class DataProject
           return arrayn;
         
     }
+    static  getProjectByDepartament=async(departament)=>
+    {
+        let arrayn=[];
 
+        let queryinsert = `
+  
+        SELECT
+        P.ID_project, 
+        P.Project_name,
+        P.Descriptionn,
+        P.Start_datee,
+        P.End_date,
+        P.Statuss,
+        P.Project_manager,
+        P.Priorityy,
+        P.Client,
+        P.Budget
+        FROM Projects P
+        WHERE P.ID_project IN (
+            SELECT DISTINCT ID_project
+            FROM Tasks T
+            INNER JOIN Assignments A ON T.ID_task = A.ID_task
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            WHERE M.Department = '${departament}'
+        )
+    
 
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+         .query(queryinsert)
+         for (let re of result.recordset) {
+            let dtoproject = new DTOProject();   
+            this.getInformation(dtoproject,re);
+            arrayn.push(dtoproject);
+         }
+          return arrayn;
+        
+    }
+    static  getProjectsSumary=async()=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+  
+        SELECT
+        P.ID_project, 
+        P.Project_name,
+        P.Descriptionn,
+        P.Start_datee,
+        P.End_date,
+        P.Statuss,
+        P.Project_manager,
+        P.Priorityy,
+        P.Client,
+        P.Budget,
+        COUNT(T.ID_task) AS Total_tasks,
+        COUNT(CASE WHEN T.Statuss = 'Completed' THEN 1 END) AS Completed_tasks,
+        SUM(T.Hours_estimate) AS Total_hours_estimate,
+        SUM(A.Worked_hours) AS Total_hours_worked,
+        P.Budget AS Project_budget,
+        SUM(A.Worked_hours) / NULLIF(SUM(T.Hours_estimate), 0) * 100 AS Completion_percentage,
+        P.Budget - SUM(A.Worked_hours) AS Remaining_budget
+    FROM Projects P
+    LEFT JOIN Tasks T ON P.ID_project = T.ID_project
+    LEFT JOIN Assignments A ON T.ID_task = A.ID_task
+    GROUP BY P.ID_project, P.Project_name, P.Descriptionn, P.Start_datee,
+     P.End_date, P.Statuss, P.Project_manager, P.Priorityy, P.Client, P.Budget
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+         .query(queryinsert)
+         for (let re of result.recordset) {
+            let dtoproject = new DTOProject();   
+            this.getInformation(dtoproject,re);
+            dtoproject.Total_tasks = re.Total_tasks;
+            dtoproject.Completed_tasks = re.Completed_tasks;
+            dtoproject.Total_hours_estimate = re.Total_hours_estimate;
+            dtoproject.Total_hours_worked = re.Total_hours_worked;
+            dtoproject.Project_budget = re.Project_budget;
+            dtoproject.Completion_percentage = re.Completion_percentage;
+            dtoproject.Remaining_budget = re.Remaining_budget;
+            arrayn.push(dtoproject);
+         }
+          return arrayn;
+        
+    }
     //GET INFORMATION
             
     static getInformation(dtoproject,result)

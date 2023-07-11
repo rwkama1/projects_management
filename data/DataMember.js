@@ -398,9 +398,51 @@ class DataMember
               return arrayn;
            
        }
+       static  getMemberProductivity=async(idmember)=>
+       {
+           let resultquery;
+   
+           let queryinsert = `
+
+            declare @MemberID int=${idmember};
      
+            SELECT 
+            M.ID_member, 
+            M.First_name,
+            M.Last_name,
+            M.Position,
+            M.Department,
+            M.Email,
+            SUM(A.Worked_hours) AS TotalHours
+            FROM Members M
+            JOIN Assignments A ON M.ID_member = A.ID_member
+            WHERE M.ID_member = @MemberID
+            GROUP BY  
+            M.ID_member, 
+            M.First_name,
+            M.Last_name,
+            M.Position,
+            M.Department,
+            M.Email
+  
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+            .query(queryinsert)
+           
+          if(resultquery===undefined)
+            {
+                   let dtomember = new DTOMember();   
+                   this.getInformation(dtomember,result.recordset[0]);
+                   dtomember.TotalHours = result.recordset[0].TotalHours;
+                   resultquery=dtomember;
+   
+            }
+        return resultquery;
+           
+       }
        
-      //GET INFORMATION
+         //GET INFORMATION
                 
         static getInformation(dtomember, result) {
 
@@ -410,6 +452,8 @@ class DataMember
             dtomember.Position = result.Position;
             dtomember.Department = result.Department;
             dtomember.Email = result.Email;
+
+            
         }
     
 }

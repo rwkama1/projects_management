@@ -839,7 +839,8 @@ class DataTask
   
         declare @TaskID INT=${idtask}
 
-        SELECT (SUM(A.Worked_hours) * 100) / T.Hours_estimate AS Progress
+        SELECT (SUM(A.Worked_hours) * 100) / T.Hours_estimate
+         AS Progress
         FROM Tasks T
         JOIN Assignments A ON T.ID_task = A.ID_task
         WHERE T.ID_task = @TaskID
@@ -854,6 +855,80 @@ class DataTask
         return resultquery;
         
     }
+    static  getTasksByDepartment=async(departament)=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+
+        SELECT 
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate,
+        P.Project_name,
+        M.First_name,
+        M.Last_name
+        FROM Tasks T
+        INNER JOIN Projects P ON T.ID_project = P.ID_project
+        INNER JOIN Assignments A ON T.ID_task = A.ID_task
+        INNER JOIN Members M ON A.ID_member = M.ID_member
+        WHERE M.Department = '${departament}'
+
+        `
+          let pool = await Conection.conection();
+        const result = await pool.request()
+        .query(queryinsert)
+        for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+        return arrayn;
+        
+    }
+    static  getTasksGanttChart=async(idproject)=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+
+        declare @ProjectID INT=${idproject}
+
+        SELECT 
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate
+        FROM Tasks T
+        WHERE T.ID_project = @ProjectID
+        ORDER BY T.Start_datee ASC
+
+        `
+          let pool = await Conection.conection();
+        const result = await pool.request()
+        .query(queryinsert)
+        for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+        return arrayn;
+        
+    }
+
     //GET INFORMATION 
 
     static getInformation(dtotask,result)
@@ -873,5 +948,6 @@ class DataTask
         dtotask.Last_name = result.Last_name;
    
     }
+    
 }
 module.exports = { DataTask };

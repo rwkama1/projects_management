@@ -302,8 +302,23 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getProjectsByMember().then()
 
+    // async function getProjectByDepartament() {
 
+        
+    //         let getProjectByDepartament =
+    //         await DataProject.getProjectByDepartament('Department2');
+    //         console.log(getProjectByDepartament);
+    // }
+    // getProjectByDepartament().then()
 
+    async function getProjectsSumary() {
+
+        let getProjectsSumary =
+        await DataProject.getProjectsSumary();
+        console.log(getProjectsSumary);
+    }
+    getProjectsSumary().then()
+    
  //#endregion PROJECTS
 
 //#region TASK
@@ -610,13 +625,30 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getAssignedTasks().then()
 
- async function getTaskProgress() {
+//  async function getTaskProgress() {
 
-        let getTaskProgress =
-        await DataTask.getTaskProgress(1);
-        console.log(getTaskProgress);
-    }
-    getTaskProgress().then()
+//         let getTaskProgress =
+//         await DataTask.getTaskProgress(1);
+//         console.log(getTaskProgress);
+//     }
+//     getTaskProgress().then()
+
+//  async function getTasksByDepartment() {
+
+//         let getTasksByDepartment =
+//         await DataTask.getTasksByDepartment("Department2");
+//         console.log(getTasksByDepartment);
+//     }
+//     getTasksByDepartment().then()
+
+//  async function getTasksGanttChart() {
+
+//         let getTasksGanttChart =
+//         await DataTask.getTasksGanttChart(3);
+//         console.log(getTasksGanttChart);
+//     }
+//     getTasksGanttChart().then()
+
 
 
 //#endregion TASK
@@ -754,6 +786,7 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getMembersByTask().then()
 
+
     //     async function getMembersByProject() {
 
     //     let getMembersByProject =
@@ -761,6 +794,20 @@ const { DTOTask } = require("./entity/DTOTask");
     //     console.log(getMembersByProject);
     // }
     // getMembersByProject().then()
+
+
+
+    //    async function getMemberProductivity() {
+
+        //     let getMemberProductivity =
+        //     await DataMember.getMemberProductivity(2);
+        //     console.log(getMemberProductivity);
+    // }
+    //     getMemberProductivity().then()
+
+
+
+
 
 
 
@@ -775,7 +822,7 @@ const { DTOTask } = require("./entity/DTOTask");
 //             let dtoAssignments = new DTOAssignments();
             
 //             dtoAssignments.ID_member = 2;
-//             dtoAssignments.ID_task = 1;
+//             dtoAssignments.ID_task = 2;
 //             dtoAssignments.Worked_hours = 1;
 //             dtoAssignments.Assignment_date = `2023-07-11`;
 

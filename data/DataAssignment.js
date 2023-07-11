@@ -172,7 +172,7 @@ class DataAssignments
        
 
       //GET INFORMATION
-                
+  
         static getInformation(dtomember, result) {
 
             dtomember.ID_member = result.ID_member;
@@ -182,7 +182,7 @@ class DataAssignments
             dtomember.Department = result.Department;
             dtomember.Email = result.Email;
         }
-    
+
 }
 
 module.exports = { DataAssignments };

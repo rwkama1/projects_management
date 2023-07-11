@@ -65,6 +65,7 @@ CREATE TABLE Resources (
     ID_resource INT not null PRIMARY KEY Identity(1,1),
     Resource_name  VARCHAR(100) not null,
     Descriptionn  VARCHAR(255) not null,
+	Unit_cost DECIMAL not null,
     Available_quantity INT not null
 );
 go
@@ -98,15 +99,15 @@ go
 
 
 
---DROP TABLE Projects;
---DROP TABLE Tasks;
---DROP TABLE Members;
---DROP TABLE Assignments;
---DROP TABLE Milestones;
---DROP TABLE Resources;
---DROP TABLE ResourceAssignments;
---DROP TABLE Comments;
---DROP TABLE Attachments;
+DROP TABLE Projects;
+DROP TABLE Tasks;
+DROP TABLE Members;
+DROP TABLE Assignments;
+DROP TABLE ResourceAssignments;
+DROP TABLE Milestones;
+DROP TABLE Resources;
+DROP TABLE Comments;
+DROP TABLE Attachments;
 
 
 
@@ -120,10 +121,32 @@ SELECT * FROM ResourceAssignments;
 SELECT * FROM Comments;
 SELECT * FROM Attachments;
 
-delete from assignments where id_assignment=12
 
-  SELECT (SUM(A.Worked_hours) * 100) / T.Hours_estimate AS Progress
-    FROM Tasks T
-    JOIN Assignments A ON T.ID_task = A.ID_task
-    WHERE T.ID_task = 1
-    GROUP BY T.Hours_estimate
+
+
+
+   SELECT
+    P.ID_project, 
+    P.Project_name,
+    P.Descriptionn,
+    P.Start_datee,
+    P.End_date,
+    P.Statuss,
+    P.Project_manager,
+    P.Priorityy,
+    P.Client,
+    P.Budget,
+    COUNT(T.ID_task) AS Total_tasks,
+    COUNT(CASE WHEN T.Statuss = 'Completed' THEN 1 END) AS Completed_tasks,
+    SUM(T.Hours_estimate) AS Total_hours_estimate,
+    SUM(A.Worked_hours) AS Total_hours_worked,
+    P.Budget AS Project_budget,
+    SUM(A.Worked_hours) / NULLIF(SUM(T.Hours_estimate), 0) * 100 AS Completion_percentage,
+    P.Budget - SUM(A.Worked_hours) AS Remaining_budget
+FROM Projects P
+LEFT JOIN Tasks T ON P.ID_project = T.ID_project
+LEFT JOIN Assignments A ON T.ID_task = A.ID_task
+GROUP BY P.ID_project, P.Project_name, P.Descriptionn, P.Start_datee, P.End_date, P.Statuss, P.Project_manager, P.Priorityy, P.Client, P.Budget
+
+
+		
