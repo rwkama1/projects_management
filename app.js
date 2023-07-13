@@ -311,14 +311,17 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getProjectByDepartament().then()
 
-    async function getProjectsSumary() {
-
-        let getProjectsSumary =
-        await DataProject.getProjectsSumary();
-        console.log(getProjectsSumary);
-    }
-    getProjectsSumary().then()
     
+    // async function getProjectsSumary() {
+
+    //     let getProjectsSumary =
+    //     await DataProject.getProjectsSumary();
+    //     console.log(getProjectsSumary);
+    // }
+    // getProjectsSumary().then()
+    
+
+
  //#endregion PROJECTS
 
 //#region TASK
@@ -805,11 +808,21 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     //     getMemberProductivity().then()
 
+    //  async function getMemberCompletedPercentage() {
 
+    //         let getMemberCompletedPercentage =
+    //         await DataMember.getMemberCompletedPercentage(2);
+    //         console.log(getMemberCompletedPercentage);
+    // }
+    // getMemberCompletedPercentage().then()
 
+    //    async function getMemberUnassignedInProject() {
 
-
-
+    //         let getMemberUnassignedInProject =
+    //         await DataMember.getMembersUnassignedInProject(1);
+    //         console.log(getMemberUnassignedInProject);
+    // }
+    // getMemberUnassignedInProject().then()
 
 //#endregion MEMBERS
 
@@ -892,5 +905,12 @@ const { DTOTask } = require("./entity/DTOTask");
 // updateAssignmentWorked_hours().then()
 
      
+     async function getAssignmentById() {
+
+            let getAssignmentById =
+            await DataAssignments.getAssignmentById(2);
+            console.log(getAssignmentById);
+    }
+    getAssignmentById().then()
 
 //#endregion ASSIGNMENTS

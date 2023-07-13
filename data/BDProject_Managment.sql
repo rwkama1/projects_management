@@ -110,7 +110,6 @@ DROP TABLE Comments;
 DROP TABLE Attachments;
 
 
-
 SELECT * FROM Projects;
 SELECT * FROM Tasks;
 SELECT * FROM Members;
@@ -125,7 +124,7 @@ SELECT * FROM Attachments;
 
 
 
-   SELECT
+    SELECT
     P.ID_project, 
     P.Project_name,
     P.Descriptionn,
@@ -143,10 +142,32 @@ SELECT * FROM Attachments;
     P.Budget AS Project_budget,
     SUM(A.Worked_hours) / NULLIF(SUM(T.Hours_estimate), 0) * 100 AS Completion_percentage,
     P.Budget - SUM(A.Worked_hours) AS Remaining_budget
-FROM Projects P
-LEFT JOIN Tasks T ON P.ID_project = T.ID_project
-LEFT JOIN Assignments A ON T.ID_task = A.ID_task
-GROUP BY P.ID_project, P.Project_name, P.Descriptionn, P.Start_datee, P.End_date, P.Statuss, P.Project_manager, P.Priorityy, P.Client, P.Budget
+	FROM Projects P
+	LEFT JOIN Tasks T ON P.ID_project = T.ID_project
+	LEFT JOIN Assignments A ON T.ID_task = A.ID_task
+	GROUP BY P.ID_project, P.Project_name, P.Descriptionn, P.Start_datee,
+	 P.End_date, P.Statuss, P.Project_manager, P.Priorityy, P.Client, P.Budget
+
+
+
+	DECLARE @ID_member INT = 2;
+
+SELECT
+    M.ID_member,
+    M.First_name,
+    M.Last_name,
+    M.Position,
+    M.Department,
+    M.Email,
+    (SUM(A.Worked_hours) * 100) / NULLIF((SELECT SUM(T.Hours_estimate)
+                                          FROM Tasks T
+                                          INNER JOIN Assignments A ON T.ID_task = A.ID_task
+                                          WHERE A.ID_member = @ID_member), 0) AS CompletedPercentage
+FROM Assignments A
+INNER JOIN Members M ON A.ID_member = M.ID_member
+WHERE A.ID_member = @ID_member
+GROUP BY M.ID_member, M.First_name, M.Last_name, M.Position, M.Department, M.Email
+
 
 
 		

@@ -423,7 +423,6 @@ class DataTask
 
         let queryinsert = `
 
-    
         DECLARE @projectid INT = ${idproject};
 
         IF NOT EXISTS (SELECT 1 FROM Projects 

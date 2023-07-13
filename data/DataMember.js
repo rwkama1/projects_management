@@ -441,7 +441,81 @@ class DataMember
         return resultquery;
            
        }
-       
+       static  getMemberCompletedPercentage=async(idmember)=>
+       {
+           let resultquery;
+   
+           let queryinsert = `
+
+            declare @ID_member int=${idmember};
+
+            SELECT
+                M.ID_member,
+                M.First_name,
+                M.Last_name,
+                M.Position,
+                M.Department,
+                M.Email,
+                (SUM(A.Worked_hours) * 100) / NULLIF((SELECT SUM(T.Hours_estimate)
+                                                      FROM Tasks T
+                                                      INNER JOIN Assignments A ON T.ID_task = A.ID_task
+                                                      WHERE A.ID_member = @ID_member), 0) AS CompletedPercentage
+            FROM Assignments A
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            WHERE A.ID_member = @ID_member
+            GROUP BY M.ID_member, M.First_name, M.Last_name, M.Position, M.Department, M.Email
+            
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+            .query(queryinsert)
+           
+          if(resultquery===undefined)
+            {
+                   let dtomember = new DTOMember();   
+                   this.getInformation(dtomember,result.recordset[0]);
+                   dtomember.CompletedPercentage = result.recordset[0].CompletedPercentage;
+                   resultquery=dtomember;
+   
+            }
+        return resultquery;
+           
+       }
+       static  getMembersUnassignedInProject=async(idproject)=>
+       {
+           let arrayn=[];
+   
+           let queryinsert = `
+
+            declare @ProjectID int=${idproject};
+            
+            SELECT
+                M.ID_member,
+                M.First_name,
+                M.Last_name,
+                M.Position,
+                M.Department,
+                M.Email
+                FROM Members M
+                WHERE M.ID_member NOT IN (
+                    SELECT A.ID_member
+                    FROM Assignments A
+                    INNER JOIN Tasks T ON A.ID_task = T.ID_task
+                    WHERE T.ID_project = @ProjectID
+                )
+            
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtomember = new DTOMember();   
+                this.getInformation(dtomember,re);
+                arrayn.push(dtomember);
+             }
+              return arrayn;
+           
+       }
          //GET INFORMATION
                 
         static getInformation(dtomember, result) {

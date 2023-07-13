@@ -1,4 +1,5 @@
 const { Date } = require("mssql");
+const { DTOAssignments } = require("../entity/DTOAssignment");
 
 const { Conection } = require("./Connection");
 
@@ -169,18 +170,57 @@ class DataAssignments
 
        //GET
 
-       
+       static  getAssignmentById=async(idassignment)=>
+       {
+           let resultquery;
+   
+           let queryinsert = `
+   
+            DECLARE @AssignmentID INT =${idassignment};
+
+            SELECT 
+            A.ID_assignment,
+            A.Assignment_date,
+            A.Worked_hours,
+            T.ID_task,
+            T.Task_name,
+            M.ID_member,
+            M.First_name,
+            M.Last_name     
+            FROM Assignments A
+            INNER JOIN Tasks T ON A.ID_task = T.ID_task
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            WHERE A.ID_assignment = @AssignmentID;
+   
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+            .query(queryinsert)
+           
+            if(resultquery===undefined)
+            {
+                   let dtoAssignments = new DTOAssignments();   
+                   this.getInformation(dtoAssignments,result.recordset[0]);
+                   resultquery=dtoAssignments;
+   
+           }
+        return resultquery;
+           
+       }
 
       //GET INFORMATION
   
-        static getInformation(dtomember, result) {
+        static getInformation(dtoAssignments, result) {
 
-            dtomember.ID_member = result.ID_member;
-            dtomember.First_name = result.First_name;
-            dtomember.Last_name = result.Last_name;
-            dtomember.Position = result.Position;
-            dtomember.Department = result.Department;
-            dtomember.Email = result.Email;
+           
+            dtoAssignments.ID_assignment = result.ID_assignment;
+            dtoAssignments.Assignment_date = result.Assignment_date;
+            dtoAssignments.Worked_hours = result.Worked_hours;
+            dtoAssignments.ID_task = result.ID_task;
+            dtoAssignments.Task_name = result.Task_name;
+            dtoAssignments.ID_member = result.ID_member;
+            dtoAssignments.First_name = result.First_name;
+            dtoAssignments.Last_name = result.Last_name;
         }
 
 }
