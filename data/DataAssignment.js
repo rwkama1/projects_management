@@ -1,4 +1,4 @@
-const { Date } = require("mssql");
+const { Date, Int } = require("mssql");
 const { DTOAssignments } = require("../entity/DTOAssignment");
 
 const { Conection } = require("./Connection");
@@ -170,6 +170,39 @@ class DataAssignments
 
        //GET
 
+       static  getAssignments=async()=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+           
+
+            SELECT 
+            A.ID_assignment,
+            A.Assignment_date,
+            A.Worked_hours,
+            T.ID_task,
+            T.Task_name,
+            M.ID_member,
+            M.First_name,
+            M.Last_name     
+            FROM Assignments A
+            INNER JOIN Tasks T ON A.ID_task = T.ID_task
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            ORDER BY A.Assignment_date DESC;
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
        static  getAssignmentById=async(idassignment)=>
        {
            let resultquery;
@@ -207,10 +240,298 @@ class DataAssignments
         return resultquery;
            
        }
+       static  getAssignmentByTask=async(idtask)=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+            DECLARE @ID_task INT =${idtask};
 
+            SELECT 
+            A.ID_assignment,
+            A.Assignment_date,
+            A.Worked_hours,
+            T.ID_task,
+            T.Task_name,
+            M.ID_member,
+            M.First_name,
+            M.Last_name     
+            FROM Assignments A
+            INNER JOIN Tasks T ON A.ID_task = T.ID_task
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            WHERE A.ID_task  = @ID_task;
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+       static  getAssignmentByMember=async(idmember)=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+            DECLARE @MemberID INT =${idmember};
+
+            SELECT 
+            A.ID_assignment,
+            A.Assignment_date,
+            A.Worked_hours,
+            T.ID_task,
+            T.Task_name,
+            M.ID_member,
+            M.First_name,
+            M.Last_name     
+            FROM Assignments A
+            INNER JOIN Tasks T ON A.ID_task = T.ID_task
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            WHERE A.ID_member = @MemberID;
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+       static  getAssignmentByProject=async(idproject)=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+            DECLARE @ProjectID INT =${idproject};
+
+            SELECT 
+            A.ID_assignment,
+            A.Assignment_date,
+            A.Worked_hours,
+            T.ID_task,
+            T.Task_name,
+            M.ID_member,
+            M.First_name,
+            M.Last_name     
+            FROM Assignments A
+            INNER JOIN Tasks T ON A.ID_task = T.ID_task
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            WHERE T.ID_project = @ProjectID;
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+       static  getAssignmentByDepartment=async(department)=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+            DECLARE @Department varchar(100) ='${department}';
+
+            SELECT 
+            A.ID_assignment,
+            A.Assignment_date,
+            A.Worked_hours,
+            T.ID_task,
+            T.Task_name,
+            M.ID_member,
+            M.First_name,
+            M.Last_name     
+            FROM Assignments A
+            INNER JOIN Tasks T ON A.ID_task = T.ID_task
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            WHERE M.Department = @Department;
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+       static  getAssignmentByWorkedHours=async(workedhours)=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+            DECLARE @WorkedHours int  =${workedhours};
+
+            SELECT 
+            A.ID_assignment,
+            A.Assignment_date,
+            A.Worked_hours,
+            T.ID_task,
+            T.Task_name,
+            M.ID_member,
+            M.First_name,
+            M.Last_name     
+            FROM Assignments A
+            INNER JOIN Tasks T ON A.ID_task = T.ID_task
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            WHERE A.Worked_hours = @WorkedHours;
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+       static  getAssignmentByCountByMember=async()=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+
+            SELECT 
+            M.ID_member,
+            M.First_name,
+            M.Last_name,
+            COUNT(*) AS AssignmentsCount
+            FROM Assignments A
+            INNER JOIN Members M ON A.ID_member = M.ID_member
+            GROUP BY M.ID_member,M.First_name, M.Last_name
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                dtoAssignments.AssignmentsCount = re.AssignmentsCount;
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+       static  getAssignmentByCountByTask=async()=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+
+            SELECT 
+            T.ID_task,
+            T.Task_name,
+            COUNT(*) AS AssignmentsCount
+            FROM Assignments A
+            INNER JOIN Tasks T ON A.ID_task = T.ID_task
+            GROUP BY T.ID_task, T.Task_name
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                dtoAssignments.AssignmentsCount = re.AssignmentsCount;
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+
+       static  getTotalWorkedHoursByTaskAndMember=async()=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+
+           SELECT 
+           T.ID_task,
+           T.Task_name,
+           M.ID_member,
+           M.First_name,
+           M.Last_name,
+           SUM(A.Worked_hours) AS TotalWorkedHours
+        FROM Assignments A
+        INNER JOIN Tasks T ON A.ID_task = T.ID_task
+        INNER JOIN Members M ON A.ID_member = M.ID_member
+        GROUP BY 
+           T.ID_task,
+           T.Task_name,
+           M.ID_member,
+           M.First_name,
+           M.Last_name;
+       
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+                dtoAssignments.TotalWorkedHours = re.TotalWorkedHours;
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+       static  getAssignmentsBetweenWorked_hours=async(minworkedhours=0,maxworkedhours=9999)=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+
+           SELECT 
+           A.ID_assignment,
+           A.Assignment_date,
+           A.Worked_hours,
+           T.ID_task,
+           T.Task_name,
+           M.ID_member,
+           M.First_name,
+           M.Last_name     
+           FROM Assignments A
+           INNER JOIN Tasks T ON A.ID_task = T.ID_task
+           INNER JOIN Members M ON A.ID_member = M.ID_member
+           WHERE A.Worked_hours BETWEEN @MinWorked_hours AND @MaxWorked_hours;
+
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .input('MinWorked_hours', Int,minworkedhours)
+            .input('MaxWorked_hours', Int, maxworkedhours)
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                this.getInformation(dtoAssignments,re);
+           
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
       //GET INFORMATION
   
-        static getInformation(dtoAssignments, result) {
+     static getInformation(dtoAssignments, result) {
 
            
             dtoAssignments.ID_assignment = result.ID_assignment;

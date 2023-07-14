@@ -904,13 +904,101 @@ const { DTOTask } = require("./entity/DTOTask");
 //     }
 // updateAssignmentWorked_hours().then()
 
-     
-     async function getAssignmentById() {
 
-            let getAssignmentById =
-            await DataAssignments.getAssignmentById(2);
-            console.log(getAssignmentById);
-    }
-    getAssignmentById().then()
+
+
+    // async function getAssignments() {
+
+    //     let getAssignments =
+    //     await DataAssignments.getAssignments();
+    //     console.log(getAssignments);
+    // }
+    // getAssignments().then()
+
+    //  async function getAssignmentById() {
+
+    //         let getAssignmentById =
+    //         await DataAssignments.getAssignmentById(2);
+    //         console.log(getAssignmentById);
+    // }
+    // getAssignmentById().then()
+
+    // async function getAssignmentByTask() {
+
+    //         let getAssignmentByTask =
+    //         await DataAssignments.getAssignmentByTask(2);
+    //         console.log(getAssignmentByTask);
+    // }
+    // getAssignmentByTask().then()
+
+
+    //     async function getAssignmentByMember() {
+
+    //         let getAssignmentByMember =
+    //         await DataAssignments.getAssignmentByMember(1);
+    //         console.log(getAssignmentByMember);
+    // }
+    // getAssignmentByMember().then()
+
+    //     async function getAssignmentByDepartment() {
+
+    //         let getAssignmentByDepartment =
+    //         await DataAssignments.getAssignmentByDepartment("Department1");
+    //         console.log(getAssignmentByDepartment);
+    // }
+    // getAssignmentByDepartment().then()
+
+    //     async function getAssignmentByWorkedHours() {
+
+    //         let getAssignmentByWorkedHours =
+    //         await DataAssignments.getAssignmentByWorkedHours(1);
+    //         console.log(getAssignmentByWorkedHours);
+    // }
+    // getAssignmentByWorkedHours().then()
+
+    //     async function getAssignmentByCountByMember() {
+
+    //         let getAssignmentByCountByMember =
+    //         await DataAssignments.getAssignmentByCountByMember();
+    //         console.log(getAssignmentByCountByMember);
+    // }
+    // getAssignmentByCountByMember().then()
+
+    //     async function getAssignmentByCountByTask() {
+
+    //         let getAssignmentByCountByTask =
+    //         await DataAssignments.getAssignmentByCountByTask();
+    //         console.log(getAssignmentByCountByTask);
+    //   }
+    //   getAssignmentByCountByTask().then()
+
+    //            async function getTotalWorkedHoursByTaskAndMember() {
+
+    //         let getTotalWorkedHoursByTaskAndMember =
+    //         await DataAssignments.getTotalWorkedHoursByTaskAndMember();
+    //         console.log(getTotalWorkedHoursByTaskAndMember);
+    //   }
+    //   getTotalWorkedHoursByTaskAndMember().then()
+
+
+    //       async function getAssignmentsBetweenDates() {
+
+    //         let startdate='2023-06-26';
+    //            let enddate='2023-08-26';
+    //         let getAssignmentsBetweenDates =
+    //         await DataAssignments.getAssignmentsBetweenDates(startdate,enddate);
+    //         console.log(getAssignmentsBetweenDates);
+    //   }
+    //   getAssignmentsBetweenDates().then()
+
+    //   async function getAssignmentsBetweenWorked_hours() {
+
+    //         let MinWorked_hours=0;
+    //            let MaxWorked_hours=999;
+    //         let getAssignmentsBetweenWorked_hours =
+    //         await DataAssignments.getAssignmentsBetweenWorked_hours(MinWorked_hours,MaxWorked_hours);
+    //         console.log(getAssignmentsBetweenWorked_hours);
+    //   }
+    //   getAssignmentsBetweenWorked_hours().then()
 
 //#endregion ASSIGNMENTS
