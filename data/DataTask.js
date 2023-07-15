@@ -927,7 +927,74 @@ class DataTask
         return arrayn;
         
     }
+    static  getTasksUnfinished=async()=>
+    {
+        let arrayn=[];
+        let queryinsert = `
 
+        SELECT 
+        DISTINCT
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate
+        FROM Tasks T
+        INNER JOIN Assignments
+         ON T.ID_task = Assignments.ID_task
+        WHERE T.Statuss <> 'Completed';
+
+        `
+        let pool = await Conection.conection();
+         const result = await pool.request()
+         .query(queryinsert)
+         for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+         return arrayn;
+        
+    }
+    static  getTasksUnassigned=async()=>
+    {
+        let arrayn=[];
+        let queryinsert = `
+
+        SELECT 
+        DISTINCT
+        T.ID_task, 
+        T.ID_project,
+        T.Task_name,
+        T.Descriptionn,
+        T.Start_datee,
+        T.End_date,
+        T.Statuss,
+        T.Task_owner,
+        T.Priorityy,
+        T.Hours_estimate
+        FROM Tasks T
+        INNER JOIN Assignments
+         ON T.ID_task = Assignments.ID_task
+        WHERE T.Statuss <> 'Completed';
+
+        `
+        let pool = await Conection.conection();
+         const result = await pool.request()
+         .query(queryinsert)
+         for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+         return arrayn;
+        
+    }
     //GET INFORMATION 
 
     static getInformation(dtotask,result)

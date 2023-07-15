@@ -1,10 +1,12 @@
 
 const { DataAssignments } = require("./data/DataAssignment");
 const { DataMember } = require("./data/DataMember");
+const { DataMilestone } = require("./data/DataMilestone");
 const { DataProject } = require("./data/DataProject");
 const { DataTask } = require("./data/DataTask");
 const { DTOAssignments } = require("./entity/DTOAssignment");
 const { DTOMember } = require("./entity/DTOMember");
+const { DTOMilestone } = require("./entity/DTOMilestone");
 const { DTOProject } = require("./entity/DTOProject");
 const { DTOTask } = require("./entity/DTOTask");
 
@@ -653,6 +655,13 @@ const { DTOTask } = require("./entity/DTOTask");
 //     getTasksGanttChart().then()
 
 
+//  async function getTasksUnfinished() {
+
+//         let getTasksUnfinished =
+//         await DataTask.getTasksUnfinished();
+//         console.log(getTasksUnfinished);
+//     }
+//     getTasksUnfinished().then()
 
 //#endregion TASK
 
@@ -823,6 +832,17 @@ const { DTOTask } = require("./entity/DTOTask");
     //         console.log(getMemberUnassignedInProject);
     // }
     // getMemberUnassignedInProject().then()
+
+    //     async function getMembersOverallocated() {
+
+    //         let getMembersOverallocated =
+    //         await DataMember.getMembersOverallocated(3);
+    //         console.log(getMembersOverallocated);
+    // }
+    // getMembersOverallocated().then()
+
+    
+
 
 //#endregion MEMBERS
 
@@ -1001,4 +1021,49 @@ const { DTOTask } = require("./entity/DTOTask");
     //   }
     //   getAssignmentsBetweenWorked_hours().then()
 
+    //    async function getAssignmentsStatistics() {
+
+           
+    //         let getAssignmentsStatistics =
+    //         await DataAssignments.getAssignmentsStatistics();
+    //         console.log(getAssignmentsStatistics);
+    //   }
+    //   getAssignmentsStatistics().then()
+
+//     async function getMembersOverallocated() {
+
+//         let getMembersOverallocated =
+//         await DataAssignments.getTotalWorkedHoursByMember(1);
+//         console.log(getMembersOverallocated);
+// }
+// getMembersOverallocated().then()
+
 //#endregion ASSIGNMENTS
+
+//#region  MILESTONE
+
+async function registerMilestone() {
+
+         for (let index = 8; index < 17; index++) {
+
+            let dtoMilestone = new DTOMilestone();
+            
+            dtoMilestone.ID_project = 5;
+            dtoMilestone.Milestone_name = "Milestone_name"+index.toString();
+            dtoMilestone.Descriptionn = "Description"+index.toString();
+            dtoMilestone.Date = `2023-07-${index}`;
+          
+
+            let registerMilestone = await DataMilestone.registerMilestone
+            (dtoMilestone);
+            if (registerMilestone===-1) {
+                throw new
+                 Error("Project not Found");
+            }
+            
+        console.log("Milestone registered successfully");
+        }
+    }
+       registerMilestone().then()
+
+//#endregion MILESTONE

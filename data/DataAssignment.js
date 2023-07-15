@@ -458,7 +458,6 @@ class DataAssignments
             return arrayn;
            
        }
-
        static  getTotalWorkedHoursByTaskAndMember=async()=>
        {
            let arrayn=[];
@@ -529,6 +528,62 @@ class DataAssignments
             return arrayn;
            
        }
+       static  getAssignmentsStatistics=async()=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+            SELECT 
+            MIN(A.Worked_hours) AS MinWorkedHours,
+            MAX(A.Worked_hours) AS MaxWorkedHours,
+            AVG(A.Worked_hours) AS AvgWorkedHours,
+            SUM(A.Worked_hours) AS TotalWorkedHours     
+            FROM Assignments A
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments();   
+                dtoAssignments.MinWorkedHours = re.MinWorkedHours;
+                dtoAssignments.MaxWorkedHours = re.MaxWorkedHours;
+                dtoAssignments.AvgWorkedHours = re.AvgWorkedHours;
+                dtoAssignments.TotalWorkedHours = re.TotalWorkedHours;
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+      static  getTotalWorkedHoursByMember=async(idmember)=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+           DECLARE @MemberID INT =${idmember};
+
+           SELECT
+           Assignments.ID_member,
+           SUM(Worked_hours)
+           AS TotalWorkedHours
+           FROM Assignments
+           WHERE ID_member = @MemberID
+           GROUP BY Assignments.ID_member
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtoAssignments = new DTOAssignments(); 
+                dtoAssignments.ID_member = re.ID_member;  
+                dtoAssignments.TotalWorkedHours = re.TotalWorkedHours;
+                arrayn.push(dtoAssignments);
+            }
+            return arrayn;
+           
+       }
+     
       //GET INFORMATION
   
      static getInformation(dtoAssignments, result) {

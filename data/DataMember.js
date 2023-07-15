@@ -516,6 +516,47 @@ class DataMember
               return arrayn;
            
        }
+       static  getMembersOverallocated=async(idproject)=>
+       {
+           let arrayn=[];
+   
+           let queryinsert = `
+
+                declare @ProjectID int=${idproject};
+            
+                SELECT
+                M.ID_member,
+                M.First_name,
+                M.Last_name,
+                M.Position,
+                M.Department,
+                M.Email
+                FROM Members M
+                INNER JOIN Assignments ON M.ID_member = Assignments.ID_member
+                INNER JOIN Tasks ON Assignments.ID_task = Tasks.ID_task
+                WHERE Tasks.ID_project = @ProjectID
+                GROUP BY 
+                M.ID_member,
+                M.First_name,
+                M.Last_name,
+                M.Position,
+                M.Department,
+                M.Email
+                HAVING COUNT(*) > 5;
+            
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtomember = new DTOMember();   
+                this.getInformation(dtomember,re);
+                arrayn.push(dtomember);
+             }
+              return arrayn;
+           
+       }
+
          //GET INFORMATION
                 
         static getInformation(dtomember, result) {
