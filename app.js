@@ -1110,7 +1110,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //         let idmilestone = 23;
 
-    //         let updateDateMilestone =
+    //         let completeMilestone =
     //          await DataMilestone.completeMilestone
     //          (idmilestone);
     //         if (completeMilestone===-1) {
@@ -1138,20 +1138,52 @@ const { DTOTask } = require("./entity/DTOTask");
 
     // cancelMilestone().then()
 
-    async function onholdMilestone() {
+    // async function onholdMilestone() {
 
-        let idmilestone = 22;
+    //     let idmilestone = 22;
 
-        let onholdMilestone =
-         await DataMilestone.onholdMilestone
-         (idmilestone);
-        if (onholdMilestone===-1) {
-            throw new
-             Error("The Milestone does not exists");
-        }
-        console.log("Milestone updated successfully");
-    }
+    //     let onholdMilestone =
+    //      await DataMilestone.onholdMilestone
+    //      (idmilestone);
+    //     if (onholdMilestone===-1) {
+    //         throw new
+    //          Error("The Milestone does not exists");
+    //     }
+    //     console.log("Milestone updated successfully");
+    // }
 
-    onholdMilestone().then()
+    // onholdMilestone().then()
+
+//         async function getMilestoneById() {
+
+//         let getMilestoneById =
+//         await DataMilestone.getMilestoneById(12);
+//         if (getMilestoneById===-1) {
+//               throw new
+//            Error("Milestone not Found");
+//             }
+//         console.log(getMilestoneById);
+// }
+// getMilestoneById().then()
+
+//         async function getMilestoneByProject() {
+
+//         let getMilestoneByProject =
+//         await DataMilestone.getMilestoneByProject(7);
+//         if (getMilestoneByProject===-1) {
+//               throw new
+//            Error("Milestone not Found");
+//             }
+//         console.log(getMilestoneByProject);
+// }
+// getMilestoneByProject().then()
+
+//         async function getMilestoneByStatus() {
+
+//         let getMilestoneByStatus =
+//         await DataMilestone.getMilestoneByStatus("on Hold");
+//         console.log(getMilestoneByStatus);
+// }
+// getMilestoneByStatus().then()
 
 //#endregion MILESTONE

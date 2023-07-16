@@ -230,6 +230,131 @@ class DataMilestone
             return resultquery;
             
         }
+
+        //GET
+
+        static  getMilestoneById=async(idmilestone)=>
+        {
+            let resultquery;
+    
+            let queryinsert = `
+    
+            DECLARE @ID_milestone INT = ${idmilestone};
+    
+            IF NOT EXISTS (SELECT ID_milestone 
+                FROM Milestones WHERE ID_milestone = @ID_milestone)
+            BEGIN
+                SELECT -1 AS notexistidmilestones
+            END
+            ELSE
+            BEGIN
+                SELECT
+                M.ID_milestone,
+                M.ID_project,
+                M.Milestone_name,
+                M.Descriptionn,
+                M.Datee,
+                M.Statuss,
+                P.Project_name
+                FROM Milestones M
+                INNER JOIN Projects P ON M.ID_project = P.ID_project
+                WHERE M.ID_milestone = @ID_milestone;
+            END
+     
+    
+            `
+            let pool = await Conection.conection();
+            const result = await pool.request()
+             .query(queryinsert)
+             resultquery = result.recordset[0].notexistidmilestones;
+             if(resultquery===undefined)
+             {
+                    let dtomilestone = new DTOMilestone();   
+                    this.getInformation(dtomilestone,result.recordset[0]);
+                    resultquery=dtomilestone;
+    
+            }
+              return resultquery;
+            
+        }
+        static  getMilestoneByProject=async(idproject)=>
+        {
+            let arrayn=[];
+    
+            let queryinsert = `
+    
+                DECLARE @ID_project INT = ${idproject};
+  
+                SELECT
+                M.ID_milestone,
+                M.ID_project,
+                M.Milestone_name,
+                M.Descriptionn,
+                M.Datee,
+                M.Statuss,
+                P.Project_name
+                FROM Milestones M
+                INNER JOIN Projects P ON M.ID_project = P.ID_project
+                WHERE P.ID_project = @ID_project;
+           
+ 
+            `
+            let pool = await Conection.conection();
+            const result = await pool.request()
+             .query(queryinsert)
+             for (let re of result.recordset) {
+                let dtomilestone = new DTOMilestone();   
+                this.getInformation(dtomilestone,re);
+                arrayn.push(dtomilestone);
+             }
+              return arrayn;
+            
+        }
+        static  getMilestoneByStatus=async(status)=>
+        {
+            let arrayn=[];
+    
+            let queryinsert = `
+    
+                DECLARE @Status Varchar(100) = '${status}';
+  
+                SELECT
+                M.ID_milestone,
+                M.ID_project,
+                M.Milestone_name,
+                M.Descriptionn,
+                M.Datee,
+                M.Statuss,
+                P.Project_name
+                FROM Milestones M
+                INNER JOIN Projects P ON M.ID_project = P.ID_project
+                WHERE M.Statuss = @Status;
+           
+ 
+            `
+            let pool = await Conection.conection();
+            const result = await pool.request()
+             .query(queryinsert)
+             for (let re of result.recordset) {
+                let dtomilestone = new DTOMilestone();   
+                this.getInformation(dtomilestone,re);
+                arrayn.push(dtomilestone);
+             }
+              return arrayn;
+            
+        }
+        //GET INFORMATION
+            
+    static getInformation(dtomilestone,result)
+    {
+        dtomilestone.ID_milestone = result.ID_milestone;
+        dtomilestone.ID_project = result.ID_project;
+        dtomilestone.Milestone_name = result.Milestone_name;
+        dtomilestone.Descriptionn = result.Descriptionn;
+        dtomilestone.Datee = result.Datee;
+        dtomilestone.Statuss = result.Statuss;
+
+    }
 }
 
 module.exports = { DataMilestone };
