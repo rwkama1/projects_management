@@ -1042,28 +1042,116 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //#region  MILESTONE
 
-async function registerMilestone() {
+// async function registerMilestone() {
 
-         for (let index = 8; index < 17; index++) {
+//          for (let index = 8; index < 17; index++) {
 
-            let dtoMilestone = new DTOMilestone();
+//             let dtoMilestone = new DTOMilestone();
             
-            dtoMilestone.ID_project = 5;
-            dtoMilestone.Milestone_name = "Milestone_name"+index.toString();
-            dtoMilestone.Descriptionn = "Description"+index.toString();
-            dtoMilestone.Date = `2023-07-${index}`;
+//             dtoMilestone.ID_project = 5;
+//             dtoMilestone.Milestone_name = "Milestone_name"+index.toString();
+//             dtoMilestone.Descriptionn = "Description"+index.toString();
+//             dtoMilestone.Date = `2023-07-${index}`;
           
 
-            let registerMilestone = await DataMilestone.registerMilestone
-            (dtoMilestone);
-            if (registerMilestone===-1) {
-                throw new
-                 Error("Project not Found");
-            }
+//             let registerMilestone = await DataMilestone.registerMilestone
+//             (dtoMilestone);
+//             if (registerMilestone===-1) {
+//                 throw new
+//                  Error("Project not Found");
+//             }
             
-        console.log("Milestone registered successfully");
+//         console.log("Milestone registered successfully");
+//         }
+// }
+//  registerMilestone().then()
+
+
+    //  async function updateNameDescriptionMilestone() {
+
+    //         let idmilestone = 22;
+    //         let namemilestone = "MilestoneNameUpdate";
+    //         let descriptionmilestone = "DescriptionnMilestoneUpdate";
+
+    //         let updateNameDescriptionMilestone =
+    //          await DataMilestone.updateNameDescriptionMilestone
+    //          (idmilestone,namemilestone,descriptionmilestone);
+    //         if (updateNameDescriptionMilestone===-1) {
+    //             throw new
+    //              Error("The Milestone does not exists");
+    //         }
+    //         console.log("Milestone updated successfully");
+    //     }
+   
+    // updateNameDescriptionMilestone().then()
+
+
+
+    //  async function updateDateMilestone() {
+
+    //         let idmilestone = 22;
+    //         let datemilestone = '2023-07-14';
+           
+
+    //         let updateDateMilestone =
+    //          await DataMilestone.updateDateMilestone
+    //          (idmilestone,datemilestone);
+    //         if (updateDateMilestone===-1) {
+    //             throw new
+    //              Error("The Milestone does not exists");
+    //         }
+    //         console.log("Milestone updated successfully");
+    //     }
+   
+    //     updateDateMilestone().then()
+
+
+    //  async function completeMilestone() {
+
+    //         let idmilestone = 23;
+
+    //         let updateDateMilestone =
+    //          await DataMilestone.completeMilestone
+    //          (idmilestone);
+    //         if (completeMilestone===-1) {
+    //             throw new
+    //              Error("The Milestone does not exists");
+    //         }
+    //         console.log("Milestone updated successfully");
+    //     }
+   
+    // completeMilestone().then()
+
+    // async function cancelMilestone() {
+
+    //     let idmilestone = 22;
+
+    //     let cancelMilestone =
+    //      await DataMilestone.cancelMilestone
+    //      (idmilestone);
+    //     if (cancelMilestone===-1) {
+    //         throw new
+    //          Error("The Milestone does not exists");
+    //     }
+    //     console.log("Milestone updated successfully");
+    // }
+
+    // cancelMilestone().then()
+
+    async function onholdMilestone() {
+
+        let idmilestone = 22;
+
+        let onholdMilestone =
+         await DataMilestone.onholdMilestone
+         (idmilestone);
+        if (onholdMilestone===-1) {
+            throw new
+             Error("The Milestone does not exists");
         }
+        console.log("Milestone updated successfully");
     }
-       registerMilestone().then()
+
+    onholdMilestone().then()
 
 //#endregion MILESTONE
