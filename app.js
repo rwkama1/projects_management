@@ -1186,4 +1186,32 @@ const { DTOTask } = require("./entity/DTOTask");
 // }
 // getMilestoneByStatus().then()
 
+//      async function getMilestoneByDateRange() {
+
+//             let startdate='2023-07-06';
+//             let enddate='2023-07-16';
+//         let getMilestoneByDateRange =
+//         await DataMilestone.getMilestoneByDateRange(startdate,enddate);
+//         console.log(getMilestoneByDateRange);
+// }
+// getMilestoneByDateRange().then()
+
+//      async function getMilestoneSearch() {
+
+           
+//         let getMilestoneSearch =
+//         await DataMilestone.getMilestoneSearch("10");
+//         console.log(getMilestoneSearch);
+// }
+// getMilestoneSearch().then()
+
+     async function getMilestoneByDepartment() {
+
+           
+        let getMilestoneByDepartment =
+        await DataMilestone.getMilestoneByDepartment("Department1");
+        console.log(getMilestoneByDepartment);
+}
+getMilestoneByDepartment().then()
+
 //#endregion MILESTONE

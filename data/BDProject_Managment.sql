@@ -170,4 +170,17 @@ GROUP BY M.ID_member, M.First_name, M.Last_name, M.Position, M.Department, M.Ema
 
 
 
+ SELECT
+                M.ID_milestone,
+                M.ID_project,
+                M.Milestone_name,
+                M.Descriptionn,
+                M.Datee,
+                M.Statuss,
+                P.Project_name
+                FROM Milestones M
+                INNER JOIN Projects P ON M.ID_project = P.ID_project
+                INNER JOIN Members Me ON P.ID_project = Me.ID_project  
+                WHERE Me.Department = 'Department1'
+
 		

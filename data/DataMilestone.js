@@ -1,6 +1,5 @@
 const { Date, Int } = require("mssql");
 const { DTOMilestone } = require("../entity/DTOMilestone");
-
 const { Conection } = require("./Connection");
 
 class DataMilestone
@@ -343,12 +342,114 @@ class DataMilestone
               return arrayn;
             
         }
+        static  getMilestoneByDateRange=async(startdate,enddate)=>
+        {
+            let arrayn=[];
+    
+            let queryinsert = `
+    
+                SELECT
+                M.ID_milestone,
+                M.ID_project,
+                M.Milestone_name,
+                M.Descriptionn,
+                M.Datee,
+                M.Statuss,
+                P.Project_name
+                FROM Milestones M
+                INNER JOIN Projects P ON M.ID_project = P.ID_project
+                WHERE Datee BETWEEN @StartDate AND @EndDate;
+           
+ 
+            `
+            let pool = await Conection.conection();
+            const result = await pool.request()
+            .input('StartDate', Date,startdate)
+            .input('EndDate', Date, enddate)
+             .query(queryinsert)
+             for (let re of result.recordset) {
+                let dtomilestone = new DTOMilestone();   
+                this.getInformation(dtomilestone,re);
+                arrayn.push(dtomilestone);
+             }
+              return arrayn;
+            
+        }
+        static  getMilestoneSearch=async(searchtext="")=>
+        {
+            let arrayn=[];
+    
+            let queryinsert = `
+
+                SELECT
+                M.ID_milestone,
+                M.ID_project,
+                M.Milestone_name,
+                M.Descriptionn,
+                M.Datee,
+                M.Statuss,
+                P.Project_name
+                FROM Milestones M
+                INNER JOIN Projects P ON M.ID_project = P.ID_project
+                WHERE 
+                M.Milestone_name LIKE '%${searchtext}%'
+                OR
+                M.Descriptionn LIKE '%${searchtext}%'
+ 
+            `
+            let pool = await Conection.conection();
+            const result = await pool.request()
+             .query(queryinsert)
+             for (let re of result.recordset) {
+                let dtomilestone = new DTOMilestone();   
+                this.getInformation(dtomilestone,re);
+                arrayn.push(dtomilestone);
+             }
+              return arrayn;
+            
+        }
+        static  getMilestoneByDepartment=async(department)=>
+        {
+            let arrayn=[];
+    
+            let queryinsert = `
+
+            SELECT
+            M.ID_milestone,
+            M.ID_project,
+            M.Milestone_name,
+            M.Descriptionn,
+            M.Datee,
+            M.Statuss,
+            P.Project_name
+            FROM Milestones M
+            INNER JOIN Projects P ON M.ID_project = P.ID_project
+            WHERE P.ID_project IN (
+                SELECT Members.ID_project
+                FROM Members
+                WHERE Department = '${department}'
+            )
+        
+ 
+            `
+            let pool = await Conection.conection();
+            const result = await pool.request()
+             .query(queryinsert)
+             for (let re of result.recordset) {
+                let dtomilestone = new DTOMilestone();   
+                this.getInformation(dtomilestone,re);
+                arrayn.push(dtomilestone);
+             }
+              return arrayn;
+            
+        }
         //GET INFORMATION
             
     static getInformation(dtomilestone,result)
     {
         dtomilestone.ID_milestone = result.ID_milestone;
         dtomilestone.ID_project = result.ID_project;
+         dtomilestone.Project_name = result.Project_name;
         dtomilestone.Milestone_name = result.Milestone_name;
         dtomilestone.Descriptionn = result.Descriptionn;
         dtomilestone.Datee = result.Datee;
