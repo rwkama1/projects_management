@@ -546,6 +546,45 @@ class DataTask
         return arrayn;
         
     }
+    static  getTaskByBetweenId=async(id1=0,id2=99999)=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+
+                declare @id1 int=${id1};
+                declare @id2 int=${id2};
+
+                SELECT 
+                T.ID_task, 
+                T.ID_project,
+                T.Task_name,
+                T.Descriptionn,
+                T.Start_datee,
+                T.End_date,
+                T.Statuss,
+                T.Task_owner,
+                T.Priorityy,
+                T.Hours_estimate,
+                P.Project_name
+                FROM Tasks T
+                INNER JOIN Projects P ON T.ID_project = P.ID_project
+                WHERE
+                T.ID_task
+                between @id1 and @id2
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+        .query(queryinsert)
+        for (let re of result.recordset) {
+            let dtotask = new DTOTask();   
+            this.getInformation(dtotask,re);
+            arrayn.push(dtotask);
+        }
+        return arrayn;
+        
+    }
     static  getTaskByOwnerName=async(Ownername="")=>
         {
             let arrayn=[];

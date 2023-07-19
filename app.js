@@ -3,11 +3,13 @@ const { DataAssignments } = require("./data/DataAssignment");
 const { DataMember } = require("./data/DataMember");
 const { DataMilestone } = require("./data/DataMilestone");
 const { DataProject } = require("./data/DataProject");
+const { DataResource } = require("./data/DataResource");
 const { DataTask } = require("./data/DataTask");
 const { DTOAssignments } = require("./entity/DTOAssignment");
 const { DTOMember } = require("./entity/DTOMember");
 const { DTOMilestone } = require("./entity/DTOMilestone");
 const { DTOProject } = require("./entity/DTOProject");
+const { DTOResource } = require("./entity/DTOResource");
 const { DTOTask } = require("./entity/DTOTask");
 
 //#region PROJECTS
@@ -26,7 +28,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //         dtoproject.Priorityy = "Medium";
     //         dtoproject.Client = "Client" + index.toString();
     //         dtoproject.Budget = 444+index;
-           
+
 
     //         let registerProject = await DataProject.registerProject(dtoproject);
     //         if (registerProject===-1) {
@@ -34,7 +36,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //              Error("The Priority must be High , Medium , Low");
     //         }
     //         if (registerProject===-2) {
-    //             throw new 
+    //             throw new
     //             Error("The End Date must be higher than Start Date");
     //         }
     //             console.log("Project registered successfully");
@@ -45,13 +47,13 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //  async function updateDescriptionNameProject() {
 
-      
 
-           
+
+
     //         let idproject = 1;
     //         let projectname = "ProjectNameUpdate";
     //         let description = "ProjectDescriptionnUpdate";
-           
+
 
     //         let updateDescriptionNameProject =
     //          await DataProject.updateDescriptionNameProject(idproject,projectname,description);
@@ -61,16 +63,16 @@ const { DTOTask } = require("./entity/DTOTask");
     //         }
     //         console.log("Project updated successfully");
     //     }
-   
+
     // updateDescriptionNameProject().then()
 
 
     // async function updateEndDateProject() {
 
-    
+
     //     let idproject = 9;
     //     let end_date = '2023-08-30';
-      
+
 
     //     let updateEndDateProject =
     //      await DataProject.updateEndDateProject(idproject,end_date);
@@ -90,7 +92,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //    async function updatePriorityProject() {
 
-    
+
     //    let idproject = 1;
     //     let priority = 'High';
 
@@ -113,14 +115,14 @@ const { DTOTask } = require("./entity/DTOTask");
 
     // async function completeProject() {
 
-    
+
     //     let idproject = 1;
-       
-      
+
+
 
     //     let completeProject =
     //      await DataProject.completeProject(idproject);
-        
+
     //     if (completeProject===-1) {
     //         throw new
     //        Error("The Project does not exists");
@@ -132,14 +134,14 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //  async function onholdProject() {
 
-    
+
     //     let idproject = 8;
-       
-      
+
+
 
     //     let onholdProject =
     //      await DataProject.onholdProject(idproject);
-        
+
     //     if (onholdProject===-1) {
     //         throw new
     //        Error("The Project does not exists");
@@ -151,13 +153,13 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //    async function cancelProject() {
 
-    
+
     //     let idproject = 8;
 
 
     //     let cancelProject =
     //      await DataProject.cancelProject(idproject);
-        
+
     //     if (cancelProject===-1) {
     //         throw new
     //        Error("The Project does not exists");
@@ -211,7 +213,7 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getProjectById().then()
 
-    
+
     //     async function getProjectByStatus() {
 
     //         let getProjectByStatus =
@@ -260,7 +262,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
             //  async function getProjectsOverdue() {
 
-         
+
             // let getProjectsOverdue =
             // await DataProject.getProjectsOverdue();
             // console.log(getProjectsOverdue);
@@ -274,10 +276,10 @@ const { DTOTask } = require("./entity/DTOTask");
 //             console.log(calculateProjectDuration);
 //         }
 //     calculateProjectDuration().then()
-    
+
     //      async function getProjectsSearchNameDesc() {
 
-        
+
     //         let getProjectsSearchNameDesc =
     //         await DataProject.getProjectsSearchNameDesc("1","");
     //         console.log(getProjectsSearchNameDesc);
@@ -285,10 +287,10 @@ const { DTOTask } = require("./entity/DTOTask");
     // getProjectsSearchNameDesc().then()
 
 
-        
+
     //      async function getProjectWithMostTasks() {
 
-        
+
     //         let getProjectWithMostTasks =
     //         await DataProject.getProjectWithMostTasks();
     //         console.log(getProjectWithMostTasks);
@@ -297,7 +299,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //     async function getProjectsByMember() {
 
-        
+
     //         let getProjectsByMember =
     //         await DataProject.getProjectsByMember(6);
     //         console.log(getProjectsByMember);
@@ -306,14 +308,14 @@ const { DTOTask } = require("./entity/DTOTask");
 
     // async function getProjectByDepartament() {
 
-        
+
     //         let getProjectByDepartament =
     //         await DataProject.getProjectByDepartament('Department2');
     //         console.log(getProjectByDepartament);
     // }
     // getProjectByDepartament().then()
 
-    
+
     // async function getProjectsSumary() {
 
     //     let getProjectsSumary =
@@ -321,7 +323,15 @@ const { DTOTask } = require("./entity/DTOTask");
     //     console.log(getProjectsSumary);
     // }
     // getProjectsSumary().then()
-    
+
+    //    async function getProjectBetweenIds() {
+
+    //     let getProjectBetweenIds =
+    //     await DataProject.getProjectBetweenIds(5,6);
+    //     console.log(getProjectBetweenIds);
+    // }
+    // getProjectBetweenIds().then()
+
 
 
  //#endregion PROJECTS
@@ -348,7 +358,7 @@ const { DTOTask } = require("./entity/DTOTask");
 //                  Error("The Priority must be High , Medium , Low ");
 //             }
 //             if (registerTask===-2) {
-//                 throw new 
+//                 throw new
 //                 Error("The End Date must be higher than Start Date");
 //             }
 //             if (registerTask===-3) {
@@ -366,7 +376,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //         let idtask = 1;
     //         let taskname = "TaskNameUpdate";
     //         let descriptiontask = "ProjectDescriptionnTaskUpdate";
-           
+
 
     //         let updateDescriptionNameTask =
     //          await DataTask.updateDescriptionNameTask(idtask,taskname,descriptiontask);
@@ -376,16 +386,16 @@ const { DTOTask } = require("./entity/DTOTask");
     //         }
     //         console.log("Task updated successfully");
     //     }
-   
+
     //     updateDescriptionNameTask().then()
 
 
     //  async function updateEndDateTask() {
 
-    
+
     //     let idtask = 9;
     //     let end_date = '2023-08-30';
-      
+
 
     //     let updateEndDateTask =
     //      await DataTask.updateEndDateTask(idtask,end_date);
@@ -404,7 +414,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //    async function updatePriorityTask() {
 
-    
+
     //    let idtask = 8;
     //     let priority = 'High';
 
@@ -426,7 +436,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //    async function updateTaskOwner() {
 
-    
+
 //        let idtask = 17;
 //         let Task_owner = 'TaskOwnerNameUpdate';
 
@@ -436,7 +446,7 @@ const { DTOTask } = require("./entity/DTOTask");
 //             throw new
 //              Error("The Task does not exists");
 //         }
-      
+
 //         console.log("Task updated successfully");
 //     }
 
@@ -446,9 +456,9 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //    async function completeTask() {
 
-    
+
     //    let idtask = 8;
-     
+
 
     //     let completeTask =
     //      await DataTask.completeTask(idtask);
@@ -456,20 +466,20 @@ const { DTOTask } = require("./entity/DTOTask");
     //         throw new
     //          Error("The Task does not exists");
     //     }
-       
+
     //     console.log("Task updated successfully");
     // }
 
     // completeTask().then()
 
-    
+
 
 
     //    async function onholdTask() {
 
-    
+
     //    let idtask = 9;
-     
+
 
     //     let onholdTask =
     //      await DataTask.onholdTask(idtask);
@@ -477,7 +487,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //         throw new
     //          Error("The Task does not exists");
     //     }
-       
+
     //     console.log("Task updated successfully");
     // }
 
@@ -488,9 +498,9 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //     async function cancelTask() {
 
-    
+
     //    let idtask = 10;
-     
+
 
     //     let cancelTask =
     //      await DataTask.cancelTask(idtask);
@@ -498,7 +508,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //         throw new
     //          Error("The Task does not exists");
     //     }
-       
+
     //     console.log("Task updated successfully");
     // }
 
@@ -541,7 +551,7 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getTasks().then()
 
-    
+
     //  async function getTasksByProject() {
 
     //         let getTasksByProject =
@@ -559,7 +569,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //         let getTasksHighPriority =
     //         await DataTask.getTasksHighPriority();
-           
+
     //         console.log(getTasksHighPriority);
     // }
     // getTasksHighPriority().then()
@@ -568,7 +578,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //         let getProjectsMediumPriority =
     //         await DataTask.getProjectsMediumPriority();
-        
+
     //         console.log(getProjectsMediumPriority);
     // }
     // getProjectsMediumPriority().then()
@@ -577,7 +587,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //     let getProjectsLowPriority =
     //     await DataTask.getProjectsLowPriority();
-    
+
     //     console.log(getProjectsLowPriority);
     // }
     // getProjectsLowPriority().then()
@@ -595,7 +605,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //      async function getTasksSearchNameDesc() {
 
-        
+
     //         let getTasksSearchNameDesc =
     //         await DataTask.getTasksSearchNameDesc("","");
     //         console.log(getTasksSearchNameDesc);
@@ -606,14 +616,14 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //         async function getTasksOverdue() {
 
-        
+
     //         let getTasksOverdue =
     //         await DataTask.getTasksOverdue();
     //         console.log(getTasksOverdue);
     // }
     // getTasksOverdue().then()
 
-    
+
     // async function getAssignedTasks() {
 
     //     let getAssignedTasks =
@@ -663,6 +673,16 @@ const { DTOTask } = require("./entity/DTOTask");
 //     }
 //     getTasksUnfinished().then()
 
+
+//  async function getTaskByBetweenId() {
+
+//         let getTaskByBetweenId =
+//         await DataTask.getTaskByBetweenId(5,8);
+//         console.log(getTaskByBetweenId);
+//     }
+//     getTaskByBetweenId().then()
+
+
 //#endregion TASK
 
 //region MEMBERS
@@ -677,7 +697,7 @@ const { DTOTask } = require("./entity/DTOTask");
 //             dtomember.Department = `Department${index}`;
 //             dtomember.Email = `email${index}@gmail.com`;
 //             dtomember.Position = `Position${index}`;
-          
+
 //             let registerMember = await DataMember.registerMember(dtomember);
 //             if (registerMember===-1) {
 //                 throw new
@@ -697,7 +717,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //         let idmember = 12;
     //         let memberfirstname = "FirstNameUpdate";
     //         let memberlastname = "LastNameUpdate";
-           
+
 
     //         let updateMemberName =
     //          await DataMember.updateMemberName(idmember,memberfirstname,memberlastname);
@@ -707,14 +727,14 @@ const { DTOTask } = require("./entity/DTOTask");
     //         }
     //         console.log("Memmber updated successfully");
     //     }
-   
+
     //     updateMemberName().then()
 
 //   async function updateMemberDepartament() {
 
 //             let idmember = 11;
 //             let departament = "DepartamentUpdate";
-            
+
 //             let updateMemberDepartament =
 //              await DataMember.updateMemberDepartament(idmember,departament);
 //             if (updateMemberDepartament===-1) {
@@ -723,14 +743,14 @@ const { DTOTask } = require("./entity/DTOTask");
 //             }
 //             console.log("Member updated successfully");
 //         }
-   
+
 //         updateMemberDepartament().then()
 
         // async function updateMemberPosition() {
 
         //     let idmember = 12;
         //     let position = "PositionUpdate";
-            
+
         //     let updateMemberPosition =
         //      await DataMember.updateMemberPosition(idmember,position);
         //     if (updateMemberPosition===-1) {
@@ -739,7 +759,7 @@ const { DTOTask } = require("./entity/DTOTask");
         //     }
         //     console.log("Member updated successfully");
         // }
-   
+
         // updateMemberPosition().then()
 
 
@@ -761,7 +781,7 @@ const { DTOTask } = require("./entity/DTOTask");
         //  }
         //  getMemberByPosition().then()
 
-         
+
         //  async function getMemberByDepartament() {
 
         //     let getMemberByDepartament =
@@ -841,7 +861,14 @@ const { DTOTask } = require("./entity/DTOTask");
     // }
     // getMembersOverallocated().then()
 
-    
+
+    // async function getMemberBetweenId() {
+
+    //         let getMemberBetweenId =
+    //         await DataMember.getMemberBetweenId(3,5);
+    //         console.log(getMemberBetweenId);
+    // }
+    // getMemberBetweenId().then()
 
 
 //#endregion MEMBERS
@@ -850,10 +877,10 @@ const { DTOTask } = require("./entity/DTOTask");
 
 // async function registerAssignments() {
 
-      
+
 
 //             let dtoAssignments = new DTOAssignments();
-            
+
 //             dtoAssignments.ID_member = 2;
 //             dtoAssignments.ID_task = 2;
 //             dtoAssignments.Worked_hours = 1;
@@ -866,20 +893,20 @@ const { DTOTask } = require("./entity/DTOTask");
 //                  Error("Task not Found");
 //             }
 //             if (registerAssignments===-2) {
-//                 throw new 
+//                 throw new
 //                 Error("Member not Found");
 //             }
 //             if (registerAssignments===-3) {
-//                 throw new 
+//                 throw new
 //                 Error("The assignment date must be greater than or equal to the current date");
 //             }
 //             if (registerAssignments===-4) {
-//                 throw new 
+//                 throw new
 //                 Error("The hours worked for that task exceeds the estimated hours of the task ");
 //             }
 //                 console.log("Assignment registered successfully");
 //         }
-    
+
 //     registerAssignments().then()
 
 
@@ -887,7 +914,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //             let ID_assignment = 11;
 //             let Assignment_date = `2023-07-07`;
-            
+
 
 //             let updateAssignmentDate = await DataAssignments.updateAssignmentDate
 //             (ID_assignment,Assignment_date);
@@ -896,11 +923,11 @@ const { DTOTask } = require("./entity/DTOTask");
 //                  Error("Assignment not Found");
 //             }
 //             if (updateAssignmentDate===-2) {
-//                 throw new 
+//                 throw new
 //               Error("The assignment date must be greater than or equal to the current date");
 //             }
 //                 console.log("Assignment updated successfully");
-       
+
 //     }
 //  updateAssignmentDate().then()
 
@@ -909,7 +936,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //             let ID_assignment = 11;
 //             let Worked_hours = 5;
-            
+
 
 //             let updateAssignmentWorked_hours =
 //              await DataAssignments.updateAssignmentWorked_hours
@@ -918,9 +945,9 @@ const { DTOTask } = require("./entity/DTOTask");
 //                 throw new
 //                  Error("Assignment not Found");
 //             }
-            
+
 //          console.log("Assignment updated successfully");
-       
+
 //     }
 // updateAssignmentWorked_hours().then()
 
@@ -1023,7 +1050,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //    async function getAssignmentsStatistics() {
 
-           
+
     //         let getAssignmentsStatistics =
     //         await DataAssignments.getAssignmentsStatistics();
     //         console.log(getAssignmentsStatistics);
@@ -1038,6 +1065,8 @@ const { DTOTask } = require("./entity/DTOTask");
 // }
 // getMembersOverallocated().then()
 
+
+
 //#endregion ASSIGNMENTS
 
 //#region  MILESTONE
@@ -1047,12 +1076,12 @@ const { DTOTask } = require("./entity/DTOTask");
 //          for (let index = 8; index < 17; index++) {
 
 //             let dtoMilestone = new DTOMilestone();
-            
+
 //             dtoMilestone.ID_project = 5;
 //             dtoMilestone.Milestone_name = "Milestone_name"+index.toString();
 //             dtoMilestone.Descriptionn = "Description"+index.toString();
 //             dtoMilestone.Date = `2023-07-${index}`;
-          
+
 
 //             let registerMilestone = await DataMilestone.registerMilestone
 //             (dtoMilestone);
@@ -1060,7 +1089,7 @@ const { DTOTask } = require("./entity/DTOTask");
 //                 throw new
 //                  Error("Project not Found");
 //             }
-            
+
 //         console.log("Milestone registered successfully");
 //         }
 // }
@@ -1082,7 +1111,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //         }
     //         console.log("Milestone updated successfully");
     //     }
-   
+
     // updateNameDescriptionMilestone().then()
 
 
@@ -1091,7 +1120,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //         let idmilestone = 22;
     //         let datemilestone = '2023-07-14';
-           
+
 
     //         let updateDateMilestone =
     //          await DataMilestone.updateDateMilestone
@@ -1102,7 +1131,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //         }
     //         console.log("Milestone updated successfully");
     //     }
-   
+
     //     updateDateMilestone().then()
 
 
@@ -1119,7 +1148,7 @@ const { DTOTask } = require("./entity/DTOTask");
     //         }
     //         console.log("Milestone updated successfully");
     //     }
-   
+
     // completeMilestone().then()
 
     // async function cancelMilestone() {
@@ -1198,20 +1227,79 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //      async function getMilestoneSearch() {
 
-           
+
 //         let getMilestoneSearch =
 //         await DataMilestone.getMilestoneSearch("10");
 //         console.log(getMilestoneSearch);
 // }
 // getMilestoneSearch().then()
 
-     async function getMilestoneByDepartment() {
 
-           
-        let getMilestoneByDepartment =
-        await DataMilestone.getMilestoneByDepartment("Department1");
-        console.log(getMilestoneByDepartment);
-}
-getMilestoneByDepartment().then()
 
 //#endregion MILESTONE
+
+
+//#region RESOURCES
+
+//  async function registerResource() {
+
+//         for (let index = 10; index < 30; index++) {
+
+//             let dtoresource = new DTOResource();
+//             dtoresource.Resource_name = "Resource_name" + index.toString();
+//             dtoresource.Descriptionn = "Descriptionn" + index.toString();
+//             dtoresource.Unit_cost = index;
+//             dtoresource.Available_quantity = 50+index;
+
+//             let registerResource = await DataResource.registerResource(dtoresource)
+//             if (registerResource===-1) {     
+//             throw new
+//                  Error("Unit price must be greater than 0");
+//             }
+//             if (registerResource===-2) {
+//                 throw new
+//                  Error("Available quantity must be greater than 0");
+//             }
+//             console.log("Resource registered successfully");
+//         }
+//     }
+//     registerResource().then()
+
+//  async function updateResourceDescriptionName() {
+
+//             let idresource = 17;
+//             let nameresource = "ResourceNameUpdate";
+//             let descriptionresource = "DescriptionResourceUpdate";
+
+//             let updateResourceDescriptionName =
+//              await DataResource.updateResourceDescriptionName
+//              (idresource,nameresource,descriptionresource);
+//             if (updateResourceDescriptionName===-1) {
+//                 throw new
+//                  Error("The Resource does not exists");
+//             }
+//             console.log("Resource updated successfully");
+//         }
+
+//         updateResourceDescriptionName().then()
+
+
+//  async function updateResourceUnitCost() {
+
+//             let idresource = 17;
+//             let unitcost = 20;
+           
+
+//             let updateResourceUnitCost =
+//              await DataResource.updateResourceUnitCost
+//              (idresource,unitcost);
+//             if (updateResourceUnitCost===-1) {
+//                 throw new
+//                  Error("The Resource does not exists");
+//             }
+//             console.log("Resource updated successfully");
+//         }
+
+//         updateResourceUnitCost().then()
+
+//#endregion RESOURCES

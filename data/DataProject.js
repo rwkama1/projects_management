@@ -412,6 +412,45 @@ class DataProject
           return arrayn;
         
     }
+    static  getProjectBetweenIds=async(id1=0,id2=99999)=>
+    {
+        let arrayn=[];
+
+        let queryinsert = `
+
+            declare @id1 int=${id1};
+            declare @id2 int=${id2};
+
+            SELECT 
+                P.ID_project, 
+                P.Project_name,
+                P.Descriptionn,
+                P.Start_datee,
+                P.End_date,
+                P.Statuss,
+                P.Project_manager,
+                P.Priorityy,
+                P.Client,
+                P.Budget
+            FROM Projects P
+            WHERE
+            P.ID_project
+             between @id1  and @id2
+       
+ 
+
+        `
+        let pool = await Conection.conection();
+        const result = await pool.request()
+         .query(queryinsert)
+         for (let re of result.recordset) {
+            let dtoproject = new DTOProject();   
+            this.getInformation(dtoproject,re);
+            arrayn.push(dtoproject);
+         }
+          return arrayn;
+        
+    }
     static  calculateProjectDuration=async(idproject)=>
     {
         let resultquery;
@@ -903,6 +942,7 @@ class DataProject
           return arrayn;
         
     }
+    
     //GET INFORMATION
             
     static getInformation(dtoproject,result)

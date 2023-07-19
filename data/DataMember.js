@@ -219,6 +219,39 @@ class DataMember
         return resultquery;
            
        }
+       static  getMemberBetweenId=async(id1=0,id2=99999)=>
+       {
+           let arrayn=[];
+   
+           let queryinsert = `
+     
+            declare @id1 int=${id1};
+            declare @id2 int=${id2};
+
+               SELECT 
+                   M.ID_member, 
+                   M.First_name,
+                   M.Last_name,
+                   M.Position,
+                   M.Department,
+                   M.Email
+               FROM Members M
+               WHERE 
+               M.ID_member
+               between @id1 and @id2
+    
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtomember = new DTOMember();   
+                this.getInformation(dtomember,re);
+                arrayn.push(dtomember);
+             }
+              return arrayn;
+           
+       }
        static  getMemberByPosition=async(position="")=>
        {
            let arrayn=[];
