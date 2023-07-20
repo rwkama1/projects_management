@@ -1302,4 +1302,31 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //         updateResourceUnitCost().then()
 
+
+ async function addAvaialableQuantity() {
+
+            let idresource = 17;
+            let quantity = 1;
+           
+
+            let addAvaialableQuantity =
+             await DataResource.addAvailableQuantity
+             (idresource,quantity);
+            if (addAvaialableQuantity===-1) {
+                throw new
+                 Error("The Resource does not exists");
+            }
+            if (addAvaialableQuantity===-2) {
+                throw new
+                 Error("The quantity must be less than the available quantity of the resource");
+            }
+            console.log("Resource updated successfully");
+        }
+
+
+addAvaialableQuantity().then()
+
+
+
+
 //#endregion RESOURCES

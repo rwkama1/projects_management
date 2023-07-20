@@ -97,8 +97,6 @@ CREATE TABLE Attachments (
 go
 
 
-
-
 DROP TABLE Projects;
 DROP TABLE Tasks;
 DROP TABLE Members;
@@ -119,9 +117,6 @@ SELECT * FROM Resources;
 SELECT * FROM ResourceAssignments;
 SELECT * FROM Comments;
 SELECT * FROM Attachments;
-
-
-
 
 
     SELECT
@@ -150,7 +145,7 @@ SELECT * FROM Attachments;
 
 
 
-	DECLARE @ID_member INT = 2;
+DECLARE @ID_member INT = 2;
 
 SELECT
     M.ID_member,

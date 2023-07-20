@@ -136,6 +136,51 @@ class DataResource
         return resultquery;
         
     }
-   
+    static  addAvailableQuantity=async(idresource,quantity)=>
+    {
+       
+        let resultquery;
+        let queryinsert = `
+
+                declare @ID_resource int = ${idresource};
+                declare @Quantity int = ${quantity};
+
+                IF NOT EXISTS (SELECT ID_resource 
+                    FROM Resources WHERE ID_resource = @ID_resource)
+                BEGIN
+                    SELECT -1 AS notexistresource;
+                    RETURN;
+                END
+
+                IF @Quantity >= (SELECT Available_quantity 
+                    FROM Resources WHERE ID_resource = @ID_resource)
+                BEGIN
+                    SELECT -2 AS InvalidQuantity;
+                    RETURN;
+                END
+
+                UPDATE Resources SET
+                Available_quantity = Available_quantity - @Quantity
+                WHERE ID_resource = @ID_resource;
+
+                select 1 as updatesucess
+          
+          `;
+          let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            resultquery = result.recordset[0].notexistresource;
+            if(resultquery===undefined)
+            {  
+                resultquery = result.recordset[0].InvalidQuantity;
+                if(resultquery===undefined)
+                {  
+                    resultquery = result.recordset[0].updatesucess;
+                }
+            }
+        pool.close();
+        return resultquery;
+        
+    }
 }
 module.exports = { DataResource };
