@@ -7,6 +7,8 @@ class DTOResource
     Unit_cost=0; 
     Available_quantity=0; 
     
+
+
     constructor()
     {  
         

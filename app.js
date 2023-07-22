@@ -4,12 +4,14 @@ const { DataMember } = require("./data/DataMember");
 const { DataMilestone } = require("./data/DataMilestone");
 const { DataProject } = require("./data/DataProject");
 const { DataResource } = require("./data/DataResource");
+const { DataResourceAssignments } = require("./data/DataResourceAssignment");
 const { DataTask } = require("./data/DataTask");
 const { DTOAssignments } = require("./entity/DTOAssignment");
 const { DTOMember } = require("./entity/DTOMember");
 const { DTOMilestone } = require("./entity/DTOMilestone");
 const { DTOProject } = require("./entity/DTOProject");
 const { DTOResource } = require("./entity/DTOResource");
+const { DTOResourceAssignment } = require("./entity/DTOResourceAssignment");
 const { DTOTask } = require("./entity/DTOTask");
 
 //#region PROJECTS
@@ -1303,30 +1305,173 @@ const { DTOTask } = require("./entity/DTOTask");
 //         updateResourceUnitCost().then()
 
 
- async function addAvaialableQuantity() {
+//  async function addAvaialableQuantity() {
 
-            let idresource = 17;
-            let quantity = 1;
+//             let idresource = 17;
+//             let quantity = 5;
            
 
-            let addAvaialableQuantity =
-             await DataResource.addAvailableQuantity
-             (idresource,quantity);
-            if (addAvaialableQuantity===-1) {
-                throw new
-                 Error("The Resource does not exists");
-            }
-            if (addAvaialableQuantity===-2) {
-                throw new
-                 Error("The quantity must be less than the available quantity of the resource");
-            }
-            console.log("Resource updated successfully");
-        }
+//             let addAvaialableQuantity =
+//              await DataResource.addAvailableQuantity
+//              (idresource,quantity);
+//             if (addAvaialableQuantity===-1) {
+//                 throw new
+//                  Error("The Resource does not exists");
+//             }
+//             console.log("Resource updated successfully");
+//         }
 
 
-addAvaialableQuantity().then()
+// addAvaialableQuantity().then()
 
+
+//  async function substractAvailableQuantity() {
+
+//             let idresource = 17;
+//             let quantity = 7;
+           
+
+//             let substractAvailableQuantity =
+//              await DataResource.substractAvailableQuantity
+//              (idresource,quantity);
+//             if (substractAvailableQuantity===-1) {
+//                 throw new
+//                  Error("The Resource does not exists");
+//             }
+//             if (substractAvailableQuantity===-2) {
+//                 throw new
+//                  Error("The quantity must be less than the available quantity of the resource");
+//             }
+//             console.log("Resource updated successfully");
+//         }
+
+
+//  substractAvailableQuantity().then()
+
+
+
+//       async function geResourceBetweenIds() {
+
+
+//         let geResourceBetweenIds =
+//         await DataResource.geResourceBetweenIds(4,5);
+//         console.log(geResourceBetweenIds);
+// }
+// geResourceBetweenIds().then()
+
+
+//       async function getResourceSearchNameDesc() {
+
+
+//         let getResourceSearchNameDesc =
+//         await DataResource.getResourceSearchNameDesc("15");
+//         console.log(getResourceSearchNameDesc);
+// }
+// getResourceSearchNameDesc().then()
+
+
+
+//       async function getResourceBetweenUnitCost() {
+
+
+//         let getResourceBetweenUnitCost =
+//         await DataResource.getResourceBetweenUnitCost(10,15);
+//         console.log(getResourceBetweenUnitCost);
+// }
+// getResourceBetweenUnitCost().then()
+
+//       async function getResourceBetweenQuantity() {
+
+
+//         let getResourceBetweenQuantity =
+//         await DataResource.getResourceBetweenQuantity(61,68);
+//         console.log(getResourceBetweenQuantity);
+// }
+// getResourceBetweenQuantity().then()
 
 
 
 //#endregion RESOURCES
+
+//#region RESOURCE ASSIGMENT
+
+// async function registerResourceAssignment() {
+
+//          for (let index = 1; index < 8; index++) {
+
+//             let dtoResourceAssignment = new DTOResourceAssignment();
+
+//             dtoResourceAssignment.ID_task = index;
+//             dtoResourceAssignment.ID_resource = index  ;
+//             dtoResourceAssignment.Assigned_quantity = index ;
+
+//             let registerResourceAssignment =
+//              await DataResourceAssignments.registerResourceAssignment
+//             (dtoResourceAssignment);
+//             if (registerResourceAssignment===-1) {
+//                 throw new
+//                  Error("Task not Found");
+//             }
+//             if (registerResourceAssignment===-2) {
+//                 throw new
+//                  Error("Resource not Found");
+//             }
+//             if (registerResourceAssignment===-3) {
+//                 throw new
+//                 Error("The quantity must be higher than 0");
+//             }
+
+//         console.log("Resource Assignment registered successfully");
+//         }
+// }
+// registerResourceAssignment().then()
+
+    //   async function getResourceAssignmentBetweenIds() {
+
+
+    //     let getResourceAssignmentBetweenIds =
+    //     await DataResourceAssignments.getResourceAssignmentBetweenIds(3,6);
+    //     console.log(getResourceAssignmentBetweenIds);
+    //         }
+    //     getResourceAssignmentBetweenIds().then()
+
+
+
+        //  async function getResourceAssignmentBetweenTaskIds() {
+
+
+        //     let getResourceAssignmentBetweenTaskIds =
+        //     await DataResourceAssignments.getResourceAssignmentBetweenTaskIds(3,5);
+        //     console.log(getResourceAssignmentBetweenTaskIds);
+
+
+        //         }
+        // getResourceAssignmentBetweenTaskIds().then()
+
+
+
+        //    async function getResourceAssignmentBetweenResourceIds() {
+
+
+        //     let getResourceAssignmentBetweenResourceIds =
+        //     await DataResourceAssignments.getResourceAssignmentBetweenResourceIds(3,5);
+        //     console.log(getResourceAssignmentBetweenResourceIds);
+
+
+        //         }
+        //   getResourceAssignmentBetweenResourceIds().then()
+
+
+    // async function getResourceAssignmentBetweenQuantity() {
+
+
+    //         let getResourceAssignmentBetweenQuantity =
+    //         await DataResourceAssignments.getResourceAssignmentBetweenQuantity(3,5);
+    //         console.log(getResourceAssignmentBetweenQuantity);
+
+
+    //             }
+    //  getResourceAssignmentBetweenQuantity().then()
+        
+
+//#endregion RESOURCE ASSIGMENT
