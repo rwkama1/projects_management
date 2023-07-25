@@ -35,6 +35,17 @@ class DataResourceAssignments
                  RETURN;
              END
   
+             DECLARE @Available_quantity INT;
+             SELECT @Available_quantity = Available_quantity
+             FROM Resources
+             WHERE ID_resource = @ID_resource;
+             
+             IF @Assigned_quantity > @Available_quantity
+             BEGIN
+                 SELECT -4 AS InsufficientResourceAvailability;
+                 RETURN;
+             END
+
              INSERT INTO ResourceAssignments 
              VALUES (@ID_task, @ID_resource, @Assigned_quantity);
 
@@ -59,6 +70,11 @@ class DataResourceAssignments
                           if(resultquery===undefined)
                           {
                            resultquery = result.recordset[0].InsertSuccess;
+                           if(resultquery===undefined)
+                           {
+                            resultquery = result.recordset[0].InsufficientResourceAvailability;
+                               
+                           }
                               
                           }
                       }
@@ -206,8 +222,97 @@ class DataResourceAssignments
            return arrayn;
            
         }
+        static  getResourceAvailabilityBetweenIds=async(id1=0,id2=99999)=>
+        {
+
+           let arrayn=[];
+
+           let queryinsert = `
+
+                DECLARE @ID_resource1 INT = ${id1};
+                DECLARE @ID_resource2 INT = ${id2};
+
+			    SELECT 
+                    RS.ID_resource_assignment, 
+                    RS.ID_task,
+                    T.Task_name,
+                    RS.ID_resource,
+                    R.Resource_name,
+                    RS.Assigned_quantity,
+                    R.Available_quantity - ISNULL(SUM(RA.Assigned_quantity), 0) AS ResourceAvailability
+                    FROM Resources R
+                    JOIN ResourceAssignments RA ON R.ID_resource = RA.ID_resource
+                    JOIN Tasks T ON RA.ID_task = T.ID_task
+                    JOIN ResourceAssignments RS ON T.ID_task = RS.ID_task AND R.ID_resource = RS.ID_resource
+                    WHERE R.ID_resource between  @ID_resource1 and @ID_resource2
+                    GROUP BY 
+                    RS.ID_resource_assignment, 
+                    RS.ID_task,
+                    T.Task_name,
+                    RS.ID_resource,
+                    R.Resource_name,
+                    RS.Assigned_quantity,
+                    R.Available_quantity;
+
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+           .query(queryinsert)
+           for (let re of result.recordset) {
+               let dtoresourceassignment = new DTOResourceAssignment();   
+               this.getInformation(dtoresourceassignment,re);
+               dtoresourceassignment.ResourceAvailability = re.ResourceAvailability;
+               arrayn.push(dtoresourceassignment);
+           }
+           return arrayn;
+           
+        }
+        static  getResourceAvailabilityTotalCostByProject=async(idproject=0)=>
+        {
+ 
+           let arrayn=[];
+
+           let queryinsert = `
+
+           DECLARE @ID_project INT =${idproject};
+              
+
+           SELECT 
+            
+               RS.ID_resource_assignment, 
+               RS.ID_task,
+               T.Task_name,
+               RS.ID_resource,
+               R.Resource_name,
+               RS.Assigned_quantity,
+               SUM(RS.Assigned_quantity * R.Unit_cost) AS TotalCostProject
+               FROM ResourceAssignments RS
+               INNER JOIN Tasks T ON RS.ID_task = T.ID_task
+               INNER JOIN Resources R ON RS.ID_resource = R.ID_resource
+               WHERE T.ID_project= @ID_project 
+               GROUP BY 
+               RS.ID_resource_assignment, 
+               RS.ID_task,
+               T.Task_name,
+               RS.ID_resource,
+               R.Resource_name,
+               RS.Assigned_quantity,
+               R.Available_quantity;
 
 
+           `
+           let pool = await Conection.conection();
+           const result = await pool.request()
+           .query(queryinsert)
+           for (let re of result.recordset) {
+               let dtoresourceassignment = new DTOResourceAssignment();   
+               this.getInformation(dtoresourceassignment,re);
+               dtoresourceassignment.TotalCostProject = re.TotalCostProject;
+               arrayn.push(dtoresourceassignment);
+           }
+           return arrayn;
+           
+        }
         
          //GET INFORMATION
                 
@@ -218,8 +323,7 @@ class DataResourceAssignments
             dtoresourceassignment.Task_name = result.Task_name;
             dtoresourceassignment.ID_resource = result.ID_resource;
             dtoresourceassignment.Resource_name = result.Resource_name;
-            dtoresourceassignment.Assigned_quantity = result.Assigned_quantity;
-            
+            dtoresourceassignment.Assigned_quantity = result.Assigned_quantity;        
         }
     
 }

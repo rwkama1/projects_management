@@ -1403,7 +1403,7 @@ const { DTOTask } = require("./entity/DTOTask");
 
 //             dtoResourceAssignment.ID_task = index;
 //             dtoResourceAssignment.ID_resource = index  ;
-//             dtoResourceAssignment.Assigned_quantity = index ;
+//             dtoResourceAssignment.Assigned_quantity =index ;
 
 //             let registerResourceAssignment =
 //              await DataResourceAssignments.registerResourceAssignment
@@ -1420,11 +1420,14 @@ const { DTOTask } = require("./entity/DTOTask");
 //                 throw new
 //                 Error("The quantity must be higher than 0");
 //             }
-
+//             if (registerResourceAssignment===-4) {
+//                 throw new
+//                 Error("The available quantity must be higher than the assigned quantity");
+//             }
 //         console.log("Resource Assignment registered successfully");
 //         }
 // }
-// registerResourceAssignment().then()
+//  registerResourceAssignment().then()
 
     //   async function getResourceAssignmentBetweenIds() {
 
@@ -1472,6 +1475,33 @@ const { DTOTask } = require("./entity/DTOTask");
 
     //             }
     //  getResourceAssignmentBetweenQuantity().then()
+
+
+
+
+    //  async function getResourceAvailabilityBetweenIds() {
+
+
+    //     let getResourceAvailabilityBetweenIds =
+    //     await DataResourceAssignments.getResourceAvailabilityBetweenIds(3,5);
+    //     console.log(getResourceAvailabilityBetweenIds);
+
+
+    //         }
+    // getResourceAvailabilityBetweenIds().then()
+
+
+       async function getResourceAvailabilityTotalCostByProject() {
+
+
+        let getResourceAvailabilityTotalCostByProject =
+        await DataResourceAssignments.getResourceAvailabilityTotalCostByProject(5);
+        console.log(getResourceAvailabilityTotalCostByProject);
+
+
+            }
+            getResourceAvailabilityTotalCostByProject().then()
+        
         
 
 //#endregion RESOURCE ASSIGMENT

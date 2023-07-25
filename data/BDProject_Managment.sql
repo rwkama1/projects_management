@@ -165,3 +165,43 @@ GROUP BY M.ID_member, M.First_name, M.Last_name, M.Position, M.Department, M.Ema
 
 
 
+
+
+
+				
+				 DECLARE @ID_project1 INT = 5;
+              
+
+			    SELECT 
+				 
+                    RS.ID_resource_assignment, 
+                    RS.ID_task,
+                    T.Task_name,
+                    RS.ID_resource,
+                    R.Resource_name,
+                    RS.Assigned_quantity,
+                    SUM(RS.Assigned_quantity * R.Unit_cost) AS TotalCostProject
+                    FROM ResourceAssignments RS
+                    INNER JOIN Tasks T ON RS.ID_task = T.ID_task
+                    INNER JOIN Resources R ON RS.ID_resource = R.ID_resource
+                    WHERE T.ID_project= @ID_project1 
+                    GROUP BY 
+                    RS.ID_resource_assignment, 
+                    RS.ID_task,
+                    T.Task_name,
+                    RS.ID_resource,
+                    R.Resource_name,
+                    RS.Assigned_quantity,
+                    R.Available_quantity;
+
+
+
+
+
+
+	 SELECT
+	  SUM(RA.Assigned_quantity * R.Unit_cost) AS TotalCost
+    FROM ResourceAssignments RA
+    INNER JOIN Tasks T ON RA.ID_task = T.ID_task
+    INNER JOIN Resources R ON RA.ID_resource = R.ID_resource
+   WHERE T.ID_project between  0 and 99999
