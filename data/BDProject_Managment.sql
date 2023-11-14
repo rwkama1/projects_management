@@ -119,6 +119,10 @@ SELECT * FROM Comments;
 SELECT * FROM Attachments;
 
 
+delete  from comments
+
+
+
     SELECT
     P.ID_project, 
     P.Project_name,

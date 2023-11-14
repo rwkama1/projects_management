@@ -1,5 +1,6 @@
 
 const { DataAssignments } = require("./data/DataAssignment");
+const { DataComments } = require("./data/DataComments");
 const { DataMember } = require("./data/DataMember");
 const { DataMilestone } = require("./data/DataMilestone");
 const { DataProject } = require("./data/DataProject");
@@ -7,6 +8,7 @@ const { DataResource } = require("./data/DataResource");
 const { DataResourceAssignments } = require("./data/DataResourceAssignment");
 const { DataTask } = require("./data/DataTask");
 const { DTOAssignments } = require("./entity/DTOAssignment");
+const { DTOComments } = require("./entity/DTOComments");
 const { DTOMember } = require("./entity/DTOMember");
 const { DTOMilestone } = require("./entity/DTOMilestone");
 const { DTOProject } = require("./entity/DTOProject");
@@ -1491,17 +1493,110 @@ const { DTOTask } = require("./entity/DTOTask");
     // getResourceAvailabilityBetweenIds().then()
 
 
-       async function getResourceAvailabilityTotalCostByProject() {
+    //    async function getResourceAvailabilityTotalCostByProject() {
 
 
-        let getResourceAvailabilityTotalCostByProject =
-        await DataResourceAssignments.getResourceAvailabilityTotalCostByProject(5);
-        console.log(getResourceAvailabilityTotalCostByProject);
+    //     let getResourceAvailabilityTotalCostByProject =
+    //     await DataResourceAssignments.getResourceAvailabilityTotalCostByProject(5);
+    //     console.log(getResourceAvailabilityTotalCostByProject);
 
 
-            }
-            getResourceAvailabilityTotalCostByProject().then()
+    //         }
+    //     getResourceAvailabilityTotalCostByProject().then()
         
         
 
 //#endregion RESOURCE ASSIGMENT
+
+//#region COMMENTS
+
+// async function registerComments() {
+
+//          for (let index = 5; index < 8; index++) {
+
+//             let dtocomment = new DTOComments();
+
+//             dtocomment.ID_member = index  ;
+//             dtocomment.ID_task =index ;
+//             dtocomment.Comment_date =`2023-11-14` ;
+//             dtocomment.Content =`Content${index}` ;
+
+//             let registerComment =
+//              await DataComments.registerComment
+//             (dtocomment);
+//             if (registerComment===-1) {
+//                 throw new
+//                  Error("Task not Found");
+//             }
+//             if (registerComment===-2) {
+//                 throw new
+//                  Error("Member not Found");
+//             }
+          
+//         console.log("Comment registered successfully");
+//         }
+// }
+// registerComments().then()
+
+//  async function updateComment() {
+
+//             let idcomment = 8;
+//             let content = "CommentUpdate";
+
+//             let updateComment =
+//              await DataComments.updateComment(idcomment,content);
+//             if (updateComment===-1) {
+//                 throw new
+//                  Error("Comment Not Found");
+//             }
+//             console.log("Comment updated successfully");
+//         }
+
+//     updateComment().then()
+
+//  async function deleteComment() {
+
+//             let idcomment = 50;
+           
+
+//             let deleteComment =
+//              await DataComments.deleteComment(idcomment);
+//             if (deleteComment===-1) {
+//                 throw new
+//                  Error("Comment Not Found");
+//             }
+//             console.log("Comment deleted successfully");
+//         }
+
+//     deleteComment().then()
+
+    //    async function getCommentById() {
+
+
+    //     let getCommentById =
+    //     await DataComments.getCommentById(8);
+    //      if (getCommentById===-1) {
+    //             throw new
+    //              Error("Comment Not Found");
+    //         }
+    //     console.log(getCommentById);
+
+
+    //         }
+    //         getCommentById().then()
+
+
+           async function getCommentsByTask() {
+
+
+            let getCommentsByTask =
+            await DataComments.getCommentsByTask(6);
+            console.log(getCommentsByTask);
+
+
+            }
+            getCommentsByTask().then()
+
+
+
+//#endregion COMMENTS

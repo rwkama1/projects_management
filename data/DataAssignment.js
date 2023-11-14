@@ -240,39 +240,7 @@ class DataAssignments
         return resultquery;
            
        }
-       static  getAssignmentByTask=async(idtask)=>
-       {
-           let arrayn=[];
-           let queryinsert = `
-   
-            DECLARE @ID_task INT =${idtask};
-
-            SELECT 
-            A.ID_assignment,
-            A.Assignment_date,
-            A.Worked_hours,
-            T.ID_task,
-            T.Task_name,
-            M.ID_member,
-            M.First_name,
-            M.Last_name     
-            FROM Assignments A
-            INNER JOIN Tasks T ON A.ID_task = T.ID_task
-            INNER JOIN Members M ON A.ID_member = M.ID_member
-            WHERE A.ID_task  = @ID_task;
-   
-           `
-           let pool = await Conection.conection();
-            const result = await pool.request()
-            .query(queryinsert)
-            for (let re of result.recordset) {
-                let dtoAssignments = new DTOAssignments();   
-                this.getInformation(dtoAssignments,re);
-                arrayn.push(dtoAssignments);
-            }
-            return arrayn;
-           
-       }
+      c
        static  getAssignmentByMember=async(idmember)=>
        {
            let arrayn=[];
