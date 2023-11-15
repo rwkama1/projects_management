@@ -207,6 +207,42 @@ class DataComments
             return arrayn;
            
        }
+       static  getCommentsLatest=async()=>
+       {
+           let arrayn=[];
+           let queryinsert = `
+   
+            
+            SELECT
+            TOP 10 
+            C.ID_comment,
+            C.Content,
+            C.Comment_date,
+
+            T.ID_task,
+            T.Task_name,
+            
+            M.ID_member, 
+            M.First_name,
+            M.Last_name               
+            FROM Comments C
+            INNER JOIN Tasks T ON C.ID_task = T.ID_task
+            INNER JOIN Members M ON C.ID_member = M.ID_member
+            ORDER BY  C.Comment_date DESC;
+   
+           `
+           let pool = await Conection.conection();
+            const result = await pool.request()
+            .query(queryinsert)
+            for (let re of result.recordset) {
+                let dtocomment = new DTOComments();   
+                this.getInformation(dtocomment,re);
+                arrayn.push(dtocomment);
+            }
+            return arrayn;
+           
+       }
+     
        //GET INFORMATION
   
         static getInformation(dtocomment , result) {

@@ -1,5 +1,6 @@
 
 const { DataAssignments } = require("./data/DataAssignment");
+const { DataAttachments } = require("./data/DataAttachments");
 const { DataComments } = require("./data/DataComments");
 const { DataMember } = require("./data/DataMember");
 const { DataMilestone } = require("./data/DataMilestone");
@@ -8,6 +9,7 @@ const { DataResource } = require("./data/DataResource");
 const { DataResourceAssignments } = require("./data/DataResourceAssignment");
 const { DataTask } = require("./data/DataTask");
 const { DTOAssignments } = require("./entity/DTOAssignment");
+const { DTOAttachments } = require("./entity/DTOAttachments");
 const { DTOComments } = require("./entity/DTOComments");
 const { DTOMember } = require("./entity/DTOMember");
 const { DTOMilestone } = require("./entity/DTOMilestone");
@@ -1586,17 +1588,100 @@ const { DTOTask } = require("./entity/DTOTask");
     //         getCommentById().then()
 
 
-           async function getCommentsByTask() {
+        //    async function getCommentsByTask() {
 
 
-            let getCommentsByTask =
-            await DataComments.getCommentsByTask(6);
-            console.log(getCommentsByTask);
+        //     let getCommentsByTask =
+        //     await DataComments.getCommentsByTask(6);
+        //     console.log(getCommentsByTask);
 
 
-            }
-            getCommentsByTask().then()
+        //     }
+        //     getCommentsByTask().then()
 
 
+
+            // async function getCommentsLatest() {
+
+
+            //     let getCommentsLatest =
+            //     await DataComments.getCommentsLatest();
+            //     console.log(getCommentsLatest);
+    
+    
+            //     }
+            //     getCommentsLatest().then()
 
 //#endregion COMMENTS
+
+//#region ATTACHMENTS
+
+// async function addAttachment() {
+
+//          for (let index = 5; index < 8; index++) {
+
+//             let dtoattachment = new DTOAttachments();
+
+//             dtoattachment.ID_task =index ;
+//             dtoattachment.File_namee =`FileName${index}` ;
+//             dtoattachment.File_path =`FilePath${index}` ;
+//             dtoattachment.Upload_date =`2023-11-15` ;
+
+//             let addAttachments =
+//              await DataAttachments.addAttachments
+//             (dtoattachment);
+//             if (addAttachments===-1) {
+//                 throw new
+//                  Error("Task not Found");
+//             }
+          
+//         console.log("Attachment registered successfully");
+//         }
+// }
+// addAttachment().then()
+
+//  async function deleteAttachment() {
+
+//             let idattachment = 4;
+           
+
+//             let deleteAttachment =
+//              await DataAttachments.deleteAttachment(idattachment);
+//             if (deleteAttachment===-1) {
+//                 throw new
+//                  Error("Attachment Not Found");
+//             }
+//             console.log("Attachment deleted successfully");
+//         }
+
+//         deleteAttachment().then()
+
+    //  async function getAttachmentById() {
+
+
+    //             let getAttachmentById =
+    //             await DataAttachments.getAttachmentById(5);
+    //              if (getAttachmentById===-1) {
+    //                     throw new
+    //                     Error("Attachment Not Found");
+    //                 }
+    //             console.log(getAttachmentById);
+    
+    
+    //             }
+    //             getAttachmentById().then()
+
+
+    //  async function getAttachmentByTask() {
+
+
+    //             let getAttachmentByTask =
+    //             await DataAttachments.getAttachmentByTask(7);
+               
+    //             console.log(getAttachmentByTask);
+    
+    
+    // }
+    //  getAttachmentByTask().then()
+
+//#endregion ATTACHMENTS
